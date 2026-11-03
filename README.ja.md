@@ -6,7 +6,7 @@ CareLoopは、健診後の担当者、次の対応、その判断の根拠、残
 
 [English](README.md) · [日本語デモを開く](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja) · [試用ガイド](docs/demo-guide.ja.md) · [構成図](docs/architecture.ja.md) · [実装と検証](docs/reviewer-map.ja.md)
 
-*架空症例で動く試作です。以下の図で仕組みを把握し、試用ガイドで実際の動作を確認できます。*
+*架空症例で動く試作です。症例画面と試用ガイドから操作を試し、構成図と検証結果で仕組みを確認できます。*
 
 ## 解消を目指す課題
 
@@ -14,11 +14,17 @@ CareLoopは、健診後の担当者、次の対応、その判断の根拠、残
 
 CareLoopは、原資料、担当チーム、次の対応、人による確認を同じ経路に結び付けます。今回の試作では、便潜血検査（FIT）陽性後のフォローを架空症例で示しています。
 
-## 全体構成
+## 試用する
 
-[![CareLoopのシステム構成図](assets/architecture.ja.svg)](docs/architecture.ja.md)
+1. [日本語のアプリ](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja)を開きます。[英語](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en)と、言語選択からアラビア語も利用できます。
+2. **CL-001 / Alex Morgan / SYN-001**を選び、[日本語ガイド](docs/demo-guide.ja.md)に沿って操作します。
+3. 同梱の[架空PDF](demo-data/README.md)で、後日の完了報告と、その訂正を確認します。
 
-原資料、担当チーム、人の判断を結び付けます。任意のAIは確認候補を提示し、APIが終了条件を管理します。[資料・判断の流れとデータ関係](docs/architecture.ja.md#pdfから判断まで)、[権限と運用](docs/security-and-operations.ja.md)、[実装・検証の対応表](docs/reviewer-map.ja.md)から詳細を確認できます。
+独立した試用には、別のブラウザプロファイルまたはプライベートウィンドウを使用します。同じプロファイルのタブはセッションを共有します。現在の画面はv0.4.12で、日本語の予定日時は日本時間、英語・アラビア語はアブダビ時間です。新規の試用領域は対応開始時点から始まります。
+
+[![CareLoop v0.4.12のCL-001初期画面：現在の担当と未確認の項目](assets/careloop-case.ja.png)](assets/careloop-case.ja.png)
+
+*現行アプリのCL-001初期状態（v0.4.12、2026年11月3日）。症例詳細を元の解像度で掲載しています。クリックで拡大できます。必要な確認3項目が不足しているため、終了操作はできません。*
 
 ## デモで確認できること
 
@@ -29,17 +35,11 @@ CareLoopは、原資料、担当チーム、次の対応、人による確認を
 | 後日の報告書に完了が記載された | 新しい判断材料として追加する。人が根拠、以前の未完了事項の解消、対応の完了、結果確認、説明を記録する。 |
 | その報告書が訂正された | 再確認が必要な状態に戻り、関連する確認が失効する。以前の資料と終了判断は保持される。 |
 
-![訂正後に再確認が必要になった3項目](assets/careloop-review.jpg)
+## 全体構成
 
-*承認済み動画の一場面。資料の訂正により、検査の実施根拠・結果確認・次の方針の説明が再確認対象になります。*
+[![CareLoopのシステム構成図](assets/architecture.ja.svg)](docs/architecture.ja.md)
 
-## 試用する
-
-1. [日本語のアプリ](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja)を開きます。[英語](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en)と、言語選択からアラビア語も利用できます。
-2. **CL-001 / Alex Morgan / SYN-001**を選び、[日本語ガイド](docs/demo-guide.ja.md)に沿って操作します。
-3. 同梱の[架空PDF](demo-data/README.md)で、後日の完了報告と、その訂正を確認します。
-
-独立した試用には、別のブラウザプロファイルまたはプライベートウィンドウを使用します。同じプロファイルのタブはセッションを共有します。現在の画面はv0.4.12で、日本語の予定日時は日本時間、英語・アラビア語はアブダビ時間です。掲載画像は準備済みの例で、新規の試用領域は対応開始時点から始まります。
+原資料、担当チーム、人の判断を結び付けます。任意のAIは確認候補を提示し、APIが終了条件を管理します。[資料・判断の流れとデータ関係](docs/architecture.ja.md#pdfから判断まで)、[権限と運用](docs/security-and-operations.ja.md)、[実装・検証の対応表](docs/reviewer-map.ja.md)から詳細を確認できます。
 
 ## AIと人の役割
 

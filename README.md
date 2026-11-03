@@ -6,7 +6,7 @@ CareLoop helps care teams keep follow-up visible: who owns the next action, what
 
 [日本語](README.ja.md) · [Open the demo](https://careloop-demo-864232222461.asia-northeast1.run.app/entry/) · [Hands-on guide](docs/demo-guide.md) · [Architecture](docs/architecture.md) · [Review map](docs/reviewer-map.md)
 
-*A working prototype with fictional data. Start with the diagrams below, then use the hands-on guide to inspect its behaviour.*
+*A working prototype with fictional data. Explore the case, try the workflow, then inspect its architecture and evidence.*
 
 ## The gap CareLoop addresses
 
@@ -14,11 +14,17 @@ A completed specialist visit can still leave the intended procedure unfinished. 
 
 CareLoop brings the source evidence, responsible team, next action and human confirmations into the same pathway. The prototype uses a fictional follow-up case after a positive faecal immunochemical test (FIT).
 
-## System at a glance
+## Try it
 
-[![CareLoop system architecture](assets/architecture.svg)](docs/architecture.md)
+1. Open the application in [English](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en) or [Japanese](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja). Arabic is also available from the language selector.
+2. Select **CL-001 / Alex Morgan / SYN-001** and follow the [hands-on guide](docs/demo-guide.md).
+3. Use the two supplied [fictional PDF fixtures](demo-data/README.md) to compare a later completion report with its correction.
 
-The service connects original evidence, accountable teams and human decisions. Optional AI proposes review items; the API enforces closure conditions. See the [evidence lifecycle and data relationships](docs/architecture.md#from-a-pdf-to-a-decision), [access and operating controls](docs/security-and-operations.md), and [implementation-to-evidence map](docs/reviewer-map.md).
+Use a separate browser profile or private window for an independent workspace. Tabs in the same profile share a session. The interface is v0.4.12; Japanese scheduling uses Japan time, while English and Arabic use Abu Dhabi time. A new workspace begins at the start of the pathway.
+
+[![CareLoop v0.4.12: initial CL-001 case, accountable owner and missing confirmations](assets/careloop-case.en.png)](assets/careloop-case.en.png)
+
+*Current application, CL-001 initial state (v0.4.12, 3 November 2026). The case detail is shown at native resolution; click to enlarge. Three required confirmations are missing, so closure is unavailable.*
 
 ## What the demonstration shows
 
@@ -29,17 +35,11 @@ The service connects original evidence, accountable teams and human decisions. O
 | A later report documents completion. | It is registered as new evidence. People record the supporting source, resolution of earlier findings, action completion, result review and explanation. |
 | The later report is corrected. | The case returns to review. Dependent confirmations are invalidated; earlier reports and the previous closure remain available. |
 
-![Three dependent confirmations requiring renewed review](assets/careloop-review.jpg)
+## System at a glance
 
-*A frame from the approved demonstration: procedure evidence, result review and plan communication require renewed review after the correction.*
+[![CareLoop system architecture](assets/architecture.svg)](docs/architecture.md)
 
-## Try it
-
-1. Open the application in [English](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en) or [Japanese](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja). Arabic is also available from the language selector.
-2. Select **CL-001 / Alex Morgan / SYN-001** and follow the [hands-on guide](docs/demo-guide.md).
-3. Use the two supplied [fictional PDF fixtures](demo-data/README.md) to compare a later completion report with its correction.
-
-Use a separate browser profile or private window for an independent workspace. Tabs in the same profile share a session. The interface is v0.4.12; Japanese scheduling uses Japan time, while English and Arabic use Abu Dhabi time. The illustrations show a prepared example; a new workspace begins at the start of the pathway.
+The service connects original evidence, accountable teams and human decisions. Optional AI proposes review items; the API enforces closure conditions. See the [evidence lifecycle and data relationships](docs/architecture.md#from-a-pdf-to-a-decision), [access and operating controls](docs/security-and-operations.md), and [implementation-to-evidence map](docs/reviewer-map.md).
 
 ## People make the decisions
 

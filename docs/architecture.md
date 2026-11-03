@@ -8,7 +8,7 @@ CareLoop connects source documents, accountable teams and human decisions in a s
 
 [![CareLoop architecture: browser, FastAPI on Cloud Run, Firestore, PDF originals and optional Vertex AI](../assets/architecture.svg)](../assets/architecture.svg)
 
-The diagram describes the deployed prototype's component arrangement. Implementation details were checked against the retained **v0.4.11** source package. The public interface identifies itself as **v0.4.12**, with Japanese record and scheduling changes. This documentation update is not a new application release or a full backend revalidation.
+The diagram describes the deployed prototype's component arrangement. Implementation details were checked against the retained **v0.4.11** source package. The public interface identifies itself as **v0.4.12**, with Japanese record and scheduling changes.
 
 | Component | Responsibility | Data or boundary |
 | --- | --- | --- |
@@ -35,7 +35,7 @@ CL-001 preserves three different facts: a visit without the procedure, a later r
 
 ## Records and relationships
 
-These are logical application records, not a claim that each row is a separate database table.
+The following table describes logical application records.
 
 | Record | Main fields and links | Purpose |
 | --- | --- | --- |

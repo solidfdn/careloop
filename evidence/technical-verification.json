@@ -13,7 +13,8 @@
     },
     "observed_japanese_schedule_label": "予定日時（日本時間）",
     "verification_date": "2026-11-03",
-    "full_backend_suite_rerun_for_this_publication": false
+    "full_backend_suite_rerun_for_this_publication": false,
+    "hosted_workflow_record": "evidence/hosted-workflow-v0.4.12.json"
   },
   "backend_regression": {
     "version": "0.4.11",
@@ -27,7 +28,8 @@
       "official Firestore emulator"
     ],
     "retained_junit_sha256": "cb5bbb2c8b39b597be70a6de852f1265db95317df1817f9105ea086dc45a9dc2",
-    "full_report_and_application_sources_included": false
+    "full_report_and_application_sources_included": false,
+    "module_breakdown_file": "evidence/backend-regression-v0.4.11.json"
   },
   "api_walkthrough": {
     "version": "0.4.11",
@@ -73,5 +75,33 @@
     "No clinical effectiveness or accuracy claim",
     "No measured staff-time saving or patient-understanding improvement",
     "Historical tests are reported under their original versions"
-  ]
+  ],
+  "hosted_workflow": {
+    "version": "0.4.12",
+    "content_revision": "careloop-0.4.12-japanese-records-jst",
+    "verified_at": "2026-11-03T12:52:10.334027+00:00",
+    "status": "PASS",
+    "method": "Independent synthetic workspace; public API walkthrough with published immutable PDFs and rules only",
+    "record_file": "evidence/hosted-workflow-v0.4.12.json",
+    "checks": [
+      "incomplete_closure_rejected",
+      "pdf_extraction_does_not_register_evidence",
+      "original_pdf_bytes_preserved",
+      "later_event_added_without_superseding_initial_report",
+      "reconciliation_reason_required",
+      "next_action_completed",
+      "current_human_confirmations_enable_closure",
+      "correction_supersedes_later_report",
+      "three_dependent_confirmations_invalidated",
+      "earlier_report_and_closure_preserved",
+      "corrected_incomplete_closure_rejected",
+      "no_model_calls"
+    ],
+    "last_observed_case_revision": 12,
+    "review_items_before_closure": 0,
+    "model_calls": 0,
+    "full_backend_regression": false,
+    "complete_browser_replay": false,
+    "clinical_or_user_evaluation": false
+  }
 }

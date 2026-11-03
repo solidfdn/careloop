@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "version": "0.4.12",
+  "content_revision": "careloop-0.4.12-japanese-records-jst",
+  "mode": "synthetic-demo",
+  "verified_at": "2026-11-03T12:52:10.334027+00:00",
+  "started_at": "2026-11-03T12:47:06.633209+00:00",
+  "method": "Independent synthetic workspace; public API walkthrough with published immutable PDFs and rules only",
+  "scope": "Hosted workflow check, not the full backend regression suite or a complete browser replay",
+  "checks": [
+    "incomplete_closure_rejected",
+    "pdf_extraction_does_not_register_evidence",
+    "original_pdf_bytes_preserved",
+    "later_event_added_without_superseding_initial_report",
+    "reconciliation_reason_required",
+    "next_action_completed",
+    "current_human_confirmations_enable_closure",
+    "correction_supersedes_later_report",
+    "three_dependent_confirmations_invalidated",
+    "earlier_report_and_closure_preserved",
+    "corrected_incomplete_closure_rejected",
+    "no_model_calls"
+  ],
+  "state_checkpoints": [
+    {
+      "stage": "incomplete_source",
+      "revision": 2,
+      "status": "open",
+      "procedure_done": false,
+      "clinician_review": false,
+      "plan_communicated": false,
+      "closure_ready": false,
+      "review_items": 0
+    },
+    {
+      "stage": "ready_for_human_closure",
+      "revision": 9,
+      "status": "open",
+      "procedure_done": true,
+      "clinician_review": true,
+      "plan_communicated": true,
+      "closure_ready": true,
+      "review_items": 0
+    },
+    {
+      "stage": "closed",
+      "revision": 10,
+      "status": "closed",
+      "procedure_done": true,
+      "clinician_review": true,
+      "plan_communicated": true,
+      "closure_ready": true,
+      "review_items": 0
+    },
+    {
+      "stage": "correction_requires_review",
+      "revision": 12,
+      "status": "review_required",
+      "procedure_done": false,
+      "clinician_review": false,
+      "plan_communicated": false,
+      "closure_ready": false,
+      "review_items": 0
+    }
+  ],
+  "review_items_before_closure": 0,
+  "resources_used": {
+    "reviewer_workspaces": 1,
+    "pdf_uploads": 2,
+    "original_pdf_gets": 3,
+    "model_calls": 0
+  },
+  "fixture_sha256": {
+    "completed": "dc9ba8ebff87a3fc39fc73a60c2388ed9896d905d603dcffe0c532c4a720c84a",
+    "correction": "54bcdba3721237c6fe5c4fc501fd1023e3f82458e1ac0fd5991b28e1dec3dc72"
+  },
+  "clinical_or_user_evaluation": false
+}

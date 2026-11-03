@@ -2,16 +2,16 @@
 
 [Home](../README.md) · [English guide](../docs/demo-guide.md) · [日本語ガイド](../docs/demo-guide.ja.md)
 
-Download both files before starting the walkthrough. Keep their contents unchanged.
+Download both files using the direct links below before starting the walkthrough. Keep their contents unchanged.
 
 | File | Role in the demonstration |
 | --- | --- |
-| [CareLoop_Demo_Completed_SYN001_v1.pdf](CareLoop_Demo_Completed_SYN001_v1.pdf) | A later report stating that all required procedure steps were performed. Register it as **new evidence**. |
-| [CareLoop_Demo_Correction_SYN001_v1.pdf](CareLoop_Demo_Correction_SYN001_v1.pdf) | A correction stating that only the first stage was performed and required steps remain pending. Register it as a **correction to the later completion report**. |
+| [CareLoop_Demo_Completed_SYN001_v1.pdf](https://github.com/solidfdn/careloop/raw/refs/heads/main/demo-data/CareLoop_Demo_Completed_SYN001_v1.pdf) | A later report stating that all required procedure steps were performed. Register it as **new evidence**. |
+| [CareLoop_Demo_Correction_SYN001_v1.pdf](https://github.com/solidfdn/careloop/raw/refs/heads/main/demo-data/CareLoop_Demo_Correction_SYN001_v1.pdf) | A correction stating that only the first stage was performed and required steps remain pending. Register it as a **correction to the later completion report**. |
 
 Both documents concern fictional case **CL-001 / SYN-001** and are marked as synthetic records. The initial specialist report is already present in the application. Do not replace that initial truthful report with the later completion report.
 
-The PDFs retain their original `v0.4.4` internal headings and `01 Nov 2026` record dates. Those labels identify the source fixtures; the current application interface is v0.4.12. The files match the retained inputs used in the v0.4.11 technical walkthrough and the visible statements in the prepared demonstration.
+The PDFs retain their original `v0.4.4` internal headings and `01 Nov 2026` record dates. Those labels identify the source fixtures; the current application interface is v0.4.12. The same files were used in the v0.4.11 technical walkthrough and the v0.4.12 rules-only verification.
 
 ## SHA-256
 

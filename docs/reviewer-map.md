@@ -28,7 +28,7 @@ Test families are identified in the [public regression breakdown](../evidence/ba
 
 ## Coverage of the assessment topics
 
-The [official challenge page](https://hack2skill.com/event/futurehealthchallenge/) lists six assessment areas (checked 3 November 2026). The labels below paraphrase those areas; this is a document map, not an organizer endorsement or a claim that formal submission is complete.
+The [official challenge page](https://hack2skill.com/event/futurehealthchallenge/) lists six assessment areas (checked 3 November 2026). The table maps each area to the relevant implementation and evidence.
 
 | Assessment topic | Where to inspect CareLoop | Present status |
 | --- | --- | --- |
@@ -55,4 +55,4 @@ Before a pilot, agree the local pathway, verified identities, data handling/rete
 
 ## Publication boundary
 
-This repository provides documentation, diagrams, selected illustrations, synthetic fixtures and sanitized technical summaries. Application source, private cloud configuration and full internal logs are not published. A reproducible application build or additional organizer-only material would require a separate delivery scope. The repository does not assert completion of registration, acceptance of terms or submission of the official form.
+This repository provides documentation, diagrams, selected illustrations, synthetic fixtures and sanitized technical summaries. Application source, private cloud configuration and full internal logs are not published. The repository supports public review and a hosted trial. Formal challenge submission is completed separately through the organizer’s portal and required deck template.

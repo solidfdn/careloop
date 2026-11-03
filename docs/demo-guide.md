@@ -8,11 +8,11 @@ Follow the fictional **CL-001 / Alex Morgan / SYN-001** pathway from an incomple
 
 - Open the [English application](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en).
 - For a separate workspace, use another browser profile or private window. Tabs within the same profile share the session. A workspace lasts 24 hours; if it expires, use the application's new-workspace control. If a demo resource limit is reached, stop and contact SOLIFAN instead of repeatedly creating sessions.
-- Download both PDFs from [demo-data](../demo-data/README.md). Keep their bytes unchanged. Historical version labels inside the documents identify the fixtures, not the current application.
+- Download the [later completion report](https://github.com/solidfdn/careloop/raw/refs/heads/main/demo-data/CareLoop_Demo_Completed_SYN001_v1.pdf) and [correction report](https://github.com/solidfdn/careloop/raw/refs/heads/main/demo-data/CareLoop_Demo_Correction_SYN001_v1.pdf). Keep both files unchanged. Their historical version labels identify the fixtures, not the current application; [fixture details](../demo-data/README.md) include checksums.
 - Select **Clinician** under **Operating role**. These roles are demo personas, not verified clinical identities.
 - English scheduling uses **Abu Dhabi time (UTC+4)**. Japanese scheduling uses **Japan time (UTC+9)**. Use a future demo date in the displayed time zone; the schedule is not a clinical deadline.
 
-The published illustrations show a prepared workspace. Your new workspace starts with the original report, so follow the steps in order.
+A new workspace starts with the original report. Follow the steps in order.
 
 ## 1. Inspect the original source
 
@@ -53,7 +53,13 @@ Describe the exercise as a process demonstration. The fixture contains no real c
 
 ## 5. Check the current evidence and close
 
-Run **Check evidence** after changes. Review any source-linked items and record the applicable human decisions and reasons. Adopting an item alone does not complete its follow-up action.
+Run **Check evidence** after changes. The verified v0.4.12 rules-only walkthrough produced zero review items. If **Review items and judgments** shows zero, no item judgment is needed; the six closure confirmations still apply.
+
+If review items are listed:
+
+1. Compare each quotation with its linked source, then click **Review and record judgment**.
+2. Under **Disposition**, choose **Resolved** if the evidence establishes resolution, **Not applicable** if the item does not apply, or **Action required** if follow-up is needed. For **Action required**, first record an owner and an open next action; adopting an item does not resolve it or permit closure.
+3. Select the relevant **Active evidence reviewed**, enter the **Reason and verification**, then click **Save judgment**. Base the decision on the current source documents.
 
 When all required confirmations are current and current review items have been handled, click **Close pathway**. Enter the synthetic closure reason, check the declaration and save. The case becomes **Closed**, and its closure decision is retained.
 
@@ -71,7 +77,7 @@ Inspect **Care pathway**, **Evidence** and **History**. Run **Check evidence** a
 
 - The case requires renewed review.
 - The correction explicitly refers to the later report; that report is superseded.
-- Procedure evidence, clinician result review and plan communication require renewed confirmation. In the prepared example, three of six confirmations remain valid.
+- Procedure evidence, clinician result review and plan communication require renewed confirmation. In the verified walkthrough, three of six confirmations remain valid.
 - Closure is unavailable while the corrected incomplete state remains unresolved.
 - Earlier source PDFs and the previous closure decision remain available.
 
