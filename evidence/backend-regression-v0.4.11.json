@@ -1,0 +1,249 @@
+{
+  "application_version": "0.4.11",
+  "test_date": "2026-11-02",
+  "publication_date": "2026-11-03",
+  "source": "Retained JUnit report; developer-authored synthetic regression tests",
+  "retained_junit_sha256": "cb5bbb2c8b39b597be70a6de852f1265db95317df1817f9105ea086dc45a9dc2",
+  "summary_type": "Derived module-level aggregation; not a new test run",
+  "totals": {
+    "tests": 1011,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "groups": [
+    {
+      "id": "workflow_and_patient_interaction",
+      "totals": {
+        "tests": 137,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "modules": [
+        {
+          "name": "test_workflow",
+          "tests": 44,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_care_pathway",
+          "tests": 56,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_patient_response",
+          "tests": 37,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    {
+      "id": "source_language_and_completion_boundaries",
+      "totals": {
+        "tests": 638,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "modules": [
+        {
+          "name": "test_assertion_scope",
+          "tests": 142,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_completion_boundaries",
+          "tests": 32,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_completion_scope",
+          "tests": 48,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_local_negation",
+          "tests": 98,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_line_wrapped_sources",
+          "tests": 50,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_quoted_training",
+          "tests": 66,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_reference_context",
+          "tests": 40,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_source_detail",
+          "tests": 88,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_source_followup",
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    {
+      "id": "pdf_and_original_retrieval",
+      "totals": {
+        "tests": 97,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "modules": [
+        {
+          "name": "test_documents",
+          "tests": 62,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_pdf_extract",
+          "tests": 22,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_original_read_recovery",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    {
+      "id": "ai_control_and_transport",
+      "totals": {
+        "tests": 38,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "modules": [
+        {
+          "name": "test_ai_control",
+          "tests": 30,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_ai_transport",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    {
+      "id": "persistence_and_import",
+      "totals": {
+        "tests": 68,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "modules": [
+        {
+          "name": "test_firestore_emulator",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_firestore_store",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_case_import",
+          "tests": 25,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_cloudsql_config",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    {
+      "id": "session_isolation_and_capacity",
+      "totals": {
+        "tests": 33,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "modules": [
+        {
+          "name": "test_reviewer_sessions",
+          "tests": 21,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "test_capacity_upgrade",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    }
+  ],
+  "interpretation": [
+    "Test cases are technical checks, not independent patients or clinical observations.",
+    "SQL and official Firestore emulator coverage includes test/configuration paths not used in the public deployment.",
+    "Source and complete test suite are not published here; this summary cannot reproduce the original run.",
+    "The v0.4.12 interface checks are reported separately."
+  ]
+}

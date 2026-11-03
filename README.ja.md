@@ -4,17 +4,21 @@
 
 CareLoopは、健診後の担当者、次の対応、その判断の根拠、残っている確認事項を一つの流れで共有する仕組みです。資料が訂正された場合は再確認を促し、以前の資料と判断も辿れるようにします。
 
-[English](README.md) · [日本語デモを開く](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja) · [試用ガイド](docs/demo-guide.ja.md)
+[English](README.md) · [日本語デモを開く](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja) · [試用ガイド](docs/demo-guide.ja.md) · [構成図](docs/architecture.ja.md) · [実装と検証](docs/reviewer-map.ja.md)
 
-[![CareLoop：健診から、その先のケアへ](assets/careloop-demo.jpg)](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja)
-
-*架空症例による試作です。実機と試用ガイドで動作を確認できます。*
+*架空症例で動く試作です。以下の図で仕組みを把握し、試用ガイドで実際の動作を確認できます。*
 
 ## 解消を目指す課題
 
 紹介先を受診していても、必要な検査まで実施されたとは限りません。「受診完了」という表示だけでは、健診で見つかった問題から必要なケアに至る途中の未完了事項が見えなくなることがあります。
 
 CareLoopは、原資料、担当チーム、次の対応、人による確認を同じ経路に結び付けます。今回の試作では、便潜血検査（FIT）陽性後のフォローを架空症例で示しています。
+
+## 全体構成
+
+[![CareLoopのシステム構成図](assets/architecture.ja.svg)](docs/architecture.ja.md)
+
+原資料、担当チーム、人の判断を結び付けます。任意のAIは確認候補を提示し、APIが終了条件を管理します。[資料・判断の流れとデータ関係](docs/architecture.ja.md#pdfから判断まで)、[権限と運用](docs/security-and-operations.ja.md)、[実装・検証の対応表](docs/reviewer-map.ja.md)から詳細を確認できます。
 
 ## デモで確認できること
 
@@ -46,9 +50,11 @@ CareLoopは、原資料、担当チーム、次の対応、人による確認を
 | 資料 | 内容 |
 | --- | --- |
 | [試用ガイド](docs/demo-guide.ja.md) | 原資料の確認から、終了と訂正後の再確認まで。 |
-| [技術構成（英語）](docs/architecture.md) | 構成、資料と判断の関係、AIの役割。 |
-| [検証結果（英語）](docs/validation.md) | 対象バージョンを明示した技術確認と、その限界。 |
-| [実装範囲と制約（英語）](docs/scope-and-limitations.md) | 試作の利用・評価範囲。 |
+| [構成図と資料・判断の流れ](docs/architecture.ja.md) | 2つの図、構成要素、データ関係、AIの入出力と権限。 |
+| [権限・データ管理・運用](docs/security-and-operations.ja.md) | 操作権限、保持、依存関係、容量、障害時の扱い、費用前提。 |
+| [実装・検証の対応表](docs/reviewer-map.ja.md) | 機能と根拠、審査の観点、今後の実証仮説。 |
+| [検証結果](docs/validation.ja.md) | 対象バージョンを明示した技術確認と、その限界。 |
+| [実装範囲と制約](docs/scope-and-limitations.ja.md) | 試作の利用・評価範囲。 |
 | [PDFの説明](demo-data/README.md) | 資料の識別情報とハッシュ。 |
 | [権利・帰属情報](NOTICE.md) | 権利者と今回の公開範囲。 |
 

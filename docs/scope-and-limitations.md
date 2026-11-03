@@ -1,6 +1,6 @@
 # Scope and limitations
 
-[Home](../README.md) · [Hands-on guide](demo-guide.md)
+[Home](../README.md) · [日本語](scope-and-limitations.ja.md) · [Hands-on guide](demo-guide.md)
 
 ## Implemented demonstration
 
