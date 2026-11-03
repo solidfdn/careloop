@@ -1,0 +1,77 @@
+{
+  "publication_date": "2026-11-03",
+  "publication_type": "curated technical evidence summary",
+  "current_interface": {
+    "version": "0.4.12",
+    "content_revision": "careloop-0.4.12-japanese-records-jst",
+    "mode": "synthetic-demo",
+    "public_http_checks": {
+      "/health": 200,
+      "/entry/": 200,
+      "/?lang=en": 200,
+      "/?lang=ja": 200
+    },
+    "observed_japanese_schedule_label": "予定日時（日本時間）",
+    "verification_date": "2026-11-03",
+    "full_backend_suite_rerun_for_this_publication": false
+  },
+  "backend_regression": {
+    "version": "0.4.11",
+    "timestamp": "2026-11-02T06:38:02.096477+00:00",
+    "tests": 1011,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "stores": [
+      "SQL",
+      "official Firestore emulator"
+    ],
+    "retained_junit_sha256": "cb5bbb2c8b39b597be70a6de852f1265db95317df1817f9105ea086dc45a9dc2",
+    "full_report_and_application_sources_included": false
+  },
+  "api_walkthrough": {
+    "version": "0.4.11",
+    "verified_at": "2026-11-02T06:33:53.131394+00:00",
+    "status": "PASS",
+    "checks": [
+      "incomplete closure refused",
+      "later report added without rewriting earlier facts",
+      "resolution reason required",
+      "next action completed",
+      "source-bound candidates decided",
+      "human confirmations then closure",
+      "correction reopens and preserves prior closure",
+      "corrected incomplete closure refused",
+      "immutable fixture bytes verified"
+    ],
+    "clinical_or_user_evaluation": false
+  },
+  "browser_walkthrough": {
+    "version": "0.4.11",
+    "date": "2026-11-02",
+    "case": "CL-001",
+    "last_observed_case_revision": 13,
+    "observed_results": [
+      "Correction registered against later report",
+      "Three dependent confirmations invalidated",
+      "Closure disabled",
+      "Earlier closure and original PDFs retained"
+    ]
+  },
+  "fixtures": [
+    {
+      "file": "demo-data/CareLoop_Demo_Completed_SYN001_v1.pdf",
+      "sha256": "dc9ba8ebff87a3fc39fc73a60c2388ed9896d905d603dcffe0c532c4a720c84a"
+    },
+    {
+      "file": "demo-data/CareLoop_Demo_Correction_SYN001_v1.pdf",
+      "sha256": "54bcdba3721237c6fe5c4fc501fd1023e3f82458e1ac0fd5991b28e1dec3dc72"
+    }
+  ],
+  "limitations": [
+    "Developer-authored technical checks, not independent or blinded evaluation",
+    "No clinical effectiveness or accuracy claim",
+    "No measured staff-time saving or patient-understanding improvement",
+    "Historical tests are reported under their original versions"
+  ]
+}
