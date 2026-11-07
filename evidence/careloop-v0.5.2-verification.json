@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "publication_date": "2026-11-07",
+  "publication_type": "curated developer technical evidence summary",
+  "current_interface": {
+    "version": "0.5.2",
+    "release": "RC9",
+    "content_revision": "careloop-0.5.2-rc9-file-picker-locale",
+    "mode": "synthetic-demo",
+    "public_http_checks": {
+      "/health": 200,
+      "/entry/": 200,
+      "/?lang=en": 200,
+      "/?lang=ja": 200
+    },
+    "public_http_check_method": "Unauthenticated GET requests only; no AI calls or record-changing API requests.",
+    "full_backend_suite_rerun_on_rc9": false
+  },
+  "runs": [
+    {
+      "id": "rc4-backend-full",
+      "version": "0.5.2",
+      "release": "RC4",
+      "date": "2026-11-05",
+      "source_ids": [
+        "rc4_full_junit",
+        "rc4_recheck_summary"
+      ],
+      "method": "Full backend suite with official Firestore emulator; no production database.",
+      "tests": 1247,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-05T06:28:40.293529+00:00",
+      "module_counts": {
+        "tests.test_ai_control": 30,
+        "tests.test_ai_transport": 8,
+        "tests.test_answer_diagnostics": 3,
+        "tests.test_answer_parts": 28,
+        "tests.test_answer_recovery": 14,
+        "tests.test_answer_reference_limits": 9,
+        "tests.test_answer_reliability": 10,
+        "tests.test_answer_selection_coverage": 6,
+        "tests.test_answer_semantic_boundaries": 25,
+        "tests.test_answers": 35,
+        "tests.test_assertion_scope": 142,
+        "tests.test_capacity_upgrade": 12,
+        "tests.test_care_pathway": 56,
+        "tests.test_case_import": 25,
+        "tests.test_cloudsql_config": 7,
+        "tests.test_completion_boundaries": 32,
+        "tests.test_completion_scope": 48,
+        "tests.test_documents": 64,
+        "tests.test_explanation": 11,
+        "tests.test_firestore_emulator": 24,
+        "tests.test_firestore_store": 12,
+        "tests.test_line_wrapped_sources": 50,
+        "tests.test_local_negation": 98,
+        "tests.test_missing_details": 10,
+        "tests.test_original_read_recovery": 13,
+        "tests.test_patient_response": 37,
+        "tests.test_pdf_extract": 22,
+        "tests.test_priority": 7,
+        "tests.test_priority_import": 28,
+        "tests.test_quoted_training": 66,
+        "tests.test_reference_context": 40,
+        "tests.test_reviewer_sessions": 21,
+        "tests.test_scale_demo": 20,
+        "tests.test_source_detail": 88,
+        "tests.test_source_followup": 74,
+        "tests.test_workflow": 44,
+        "tests.test_worklist": 28
+      },
+      "firestore_emulator_required_tests_included": 418,
+      "scope": "Developer tests across workflow, evidence wording, PDF handling, patient responses, questions, isolation and persistence."
+    },
+    {
+      "id": "rc4-gemini-46",
+      "version": "0.5.2",
+      "release": "RC4",
+      "date": "2026-11-05",
+      "source_ids": [
+        "rc4_recheck_summary",
+        "rc4_answer_review"
+      ],
+      "inputs": 46,
+      "automated_passes": 46,
+      "recorded_answer_review_passes": 46,
+      "semantic_failures": 0,
+      "repeated_development_inputs": 36,
+      "additional_inputs_defined_before_execution": 10,
+      "language_counts": {
+        "ja": 27,
+        "en": 10,
+        "ar": 9
+      },
+      "review_method": "Separate read-only review of actual questions, answers, source snapshots and references; source slices, versions, ownership, history and checked time were checked. This is a developer review, not independent clinical validation.",
+      "limitations": [
+        "Recorded inputs only; not a general accuracy percentage.",
+        "API evidence review, not a new browser replay.",
+        "After-state record hashes are supported by the execution log; raw after snapshots were not independently recomputed in the answer review."
+      ]
+    },
+    {
+      "id": "rc4-hosted-api",
+      "version": "0.5.2",
+      "release": "RC4",
+      "date": "2026-11-05",
+      "source_ids": [
+        "rc4_api_checks"
+      ],
+      "checks": 21,
+      "passed": 21,
+      "requests": 54,
+      "ai_calls": 0,
+      "check_results": [
+        {
+          "id": "release_identity",
+          "pass": true
+        },
+        {
+          "id": "anonymous_case_401",
+          "pass": true
+        },
+        {
+          "id": "anonymous_explanation_401",
+          "pass": true
+        },
+        {
+          "id": "unknown_case_404",
+          "pass": true
+        },
+        {
+          "id": "long_history_created",
+          "pass": true
+        },
+        {
+          "id": "stale_write_409",
+          "pass": true
+        },
+        {
+          "id": "stale_explanation_409",
+          "pass": true
+        },
+        {
+          "id": "history_pagination_exact_no_duplicates_or_gaps",
+          "pass": true
+        },
+        {
+          "id": "stale_history_cursor_409",
+          "pass": true
+        },
+        {
+          "id": "pdf_upload_does_not_attach_or_mutate_case",
+          "pass": true
+        },
+        {
+          "id": "pdf_original_and_extraction_hashes",
+          "pass": true
+        },
+        {
+          "id": "pdf_expected_text_on_each_page",
+          "pass": true
+        },
+        {
+          "id": "pdf_original_bytes_identical",
+          "pass": true
+        },
+        {
+          "id": "pdf_anonymous_401",
+          "pass": true
+        },
+        {
+          "id": "pdf_other_session_404",
+          "pass": true
+        },
+        {
+          "id": "pdf_wrong_case_404",
+          "pass": true
+        },
+        {
+          "id": "pdf_confirmation_required_422",
+          "pass": true
+        },
+        {
+          "id": "pdf_explanation_quote_is_exact_page_substring",
+          "pass": true
+        },
+        {
+          "id": "reads_do_not_mutate_case",
+          "pass": true
+        },
+        {
+          "id": "other_session_records_unchanged",
+          "pass": true
+        },
+        {
+          "id": "no_ai_runs_added",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "id": "rc6-answer-regression",
+      "version": "0.5.2",
+      "release": "RC6",
+      "date": "2026-11-07",
+      "source_ids": [
+        "rc6_answer_junit",
+        "rc6_release_record"
+      ],
+      "scope": "Answer selection, concision, source references, semantic boundaries and recovery.",
+      "tests": 144,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timestamp": "2026-11-07T14:53:33.530515+09:00",
+      "module_counts": {
+        "backend.tests.test_answer_concise": 14,
+        "backend.tests.test_answer_diagnostics": 3,
+        "backend.tests.test_answer_parts": 28,
+        "backend.tests.test_answer_recovery": 14,
+        "backend.tests.test_answer_reference_limits": 9,
+        "backend.tests.test_answer_reliability": 10,
+        "backend.tests.test_answer_selection_coverage": 6,
+        "backend.tests.test_answer_semantic_boundaries": 25,
+        "backend.tests.test_answers": 35
+      }
+    },
+    {
+      "id": "rc6-gemini-cl006",
+      "version": "0.5.2",
+      "release": "RC6",
+      "date": "2026-11-07",
+      "source_ids": [
+        "rc6_live_questions",
+        "rc6_release_record"
+      ],
+      "case": "CL-006",
+      "inputs": 7,
+      "passed": 7,
+      "language_counts": {
+        "en": 3,
+        "ja": 2,
+        "ar": 2
+      },
+      "questions_cover": [
+        "Reason for renewed review",
+        "Paraphrases of the reason question",
+        "Combined reason, current owner, next action and due-date question"
+      ],
+      "citation_count_min": 5,
+      "citation_count_max": 6,
+      "case_hash_unchanged": true,
+      "scope": "Seven questions about one synthetic case. Not an all-request success rate or availability measurement."
+    },
+    {
+      "id": "rc9-interface-publication",
+      "version": "0.5.2",
+      "release": "RC9",
+      "date": "2026-11-07",
+      "source_ids": [
+        "rc9_interface_checks"
+      ],
+      "build": "PASS",
+      "copy_check": "PASS",
+      "question_ui_check": "PASS",
+      "file_picker_languages": [
+        "en",
+        "ja",
+        "ar"
+      ],
+      "file_picker_language_check": "PASS",
+      "patient_upload_hidden": "PASS",
+      "published_asset_bytes_match": true,
+      "runtime_configuration_preserved": true,
+      "observed_file_chooser_event": true,
+      "empty_state_preserved_after_cancel": true,
+      "import_disabled_without_file": true
+    }
+  ],
+  "component_continuity": {
+    "compared_versions": [
+      "v0.5.2 RC6",
+      "v0.5.2 RC9"
+    ],
+    "backend_python_files": 65,
+    "byte_identical": true,
+    "recorded_question_component_hashes_match_rc9": true,
+    "matched_component_count": 6,
+    "source_ids": [
+      "rc6_component_hashes",
+      "rc9_interface_checks"
+    ],
+    "interpretation": "Evidence applies to the unchanged components; this is not a full backend test execution on RC9."
+  },
+  "source_reports": [
+    {
+      "id": "rc4_full_junit",
+      "retained_source_file": "backend-full.xml",
+      "sha256": "69098ba7028158a3d567e15983b4372ad61aa27029f704fb5e93ed71ef7323d4",
+      "size_bytes": 10214643,
+      "full_report_published": false
+    },
+    {
+      "id": "rc4_recheck_summary",
+      "retained_source_file": "summary.json",
+      "sha256": "971be0f7375197ad1906a63306f3603058fef2ae0c57282985767ebdaa106a4c",
+      "size_bytes": 3622,
+      "full_report_published": false
+    },
+    {
+      "id": "rc4_answer_review",
+      "retained_source_file": "semantic_review_46.json",
+      "sha256": "cada5ff00856df1dd29f24ed60bcbe343a82ad3939d46f89f41ea5c15a554170",
+      "size_bytes": 35480,
+      "full_report_published": false
+    },
+    {
+      "id": "rc4_api_checks",
+      "retained_source_file": "api-recheck-result.json",
+      "sha256": "440ffa1f99a19dc5dc7f017f958c72d6003ffdd0713a8dbef7daafb557879f93",
+      "size_bytes": 14613,
+      "full_report_published": false
+    },
+    {
+      "id": "rc6_answer_junit",
+      "retained_source_file": "answer-tests.xml",
+      "sha256": "b0f0211f83d564e6f9691f72321aeeb30c4dd0fae97b046684fbfc6119717c2b",
+      "size_bytes": 22035,
+      "full_report_published": false
+    },
+    {
+      "id": "rc6_live_questions",
+      "retained_source_file": "live-summary.json",
+      "sha256": "aca2ae24236810b5869aa05f509fec0853830ea83bc5f2a680ab80f9ae463d4c",
+      "size_bytes": 5514,
+      "full_report_published": false
+    },
+    {
+      "id": "rc6_release_record",
+      "retained_source_file": "publication.json",
+      "sha256": "45dfb9b8678af142ee4bf06086dc3215e548c5e59e7d0d2b8140944d76c310b4",
+      "size_bytes": 504,
+      "full_report_published": false
+    },
+    {
+      "id": "rc6_component_hashes",
+      "retained_source_file": "config-preservation.json",
+      "sha256": "4287d1d558f53335813cc2997e4bdc5f7db1e5c4444ef9cc1578eb29f7823f52",
+      "size_bytes": 877,
+      "full_report_published": false
+    },
+    {
+      "id": "rc6_rate_limit_recovery",
+      "retained_source_file": "provider-429-recovered.json",
+      "sha256": "01bcb96ec99bb5e7e043e044326ead4d586c53b661513e14ac752e5697227dcc",
+      "size_bytes": 383,
+      "full_report_published": false
+    },
+    {
+      "id": "rc9_interface_checks",
+      "retained_source_file": "local-verification.json",
+      "sha256": "621844bc6105b4667b08e79585c80ec707b0b533f7af5441a85fcfcd568112fe",
+      "size_bytes": 840,
+      "full_report_published": false
+    },
+    {
+      "id": "current_public_http_check",
+      "retained_source_file": "live-http-check.json",
+      "sha256": "20cd4daaf03a956f4a3214b8a6e61b9a5ac70a26581adc0b9813dbdc0011302a",
+      "size_bytes": 480,
+      "full_report_published": false
+    }
+  ],
+  "development_recovery_notes": [
+    "An initial RC4 local run lacked the built frontend; the final full emulator run passed all 1,247 tests. Intermediate local counts are not added.",
+    "A temporary asset-fetch DNS failure and one browser automation capture stall were recovered during the RC4 recheck.",
+    "A separate RC6 provider rate-limit response and subsequent recovery were recorded. Seven successful questions do not establish an all-request success rate."
+  ],
+  "historical_records": [
+    "technical-verification-20261103.json",
+    "backend-regression-v0.4.11.json",
+    "hosted-workflow-v0.4.12.json"
+  ],
+  "limitations": [
+    "Developer technical checks on synthetic data, not an independent, blinded or clinical evaluation.",
+    "Overlapping test counts are reported separately and must not be summed.",
+    "No full backend regression was executed on RC9 for this documentation update.",
+    "The source reports are retained privately; hashes identify them but do not make the full private reports available.",
+    "Application implementation and complete test harness are not included in this repository.",
+    "Clinical effectiveness, real-user usability, staff-time savings and patient-understanding improvement have not been measured."
+  ]
+}

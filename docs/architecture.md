@@ -2,23 +2,31 @@
 
 [Home](../README.md) · [日本語](architecture.ja.md) · [Controls and operations](security-and-operations.md) · [Implementation and evidence](reviewer-map.md)
 
-CareLoop connects source documents, accountable teams and human decisions in a screening follow-up pathway. The API owns the workflow state and closure checks. The browser presents the record; optional AI proposes items for human review.
+CareLoop connects source documents, accountable teams and human decisions in a screening follow-up pathway. The API owns the workflow state and closure checks. The browser presents the record. Gemini supports natural-language questions and optional evidence review; the API binds answers to recorded facts and sources.
 
 ## System architecture
 
-[![CareLoop architecture: browser, FastAPI on Cloud Run, Firestore, PDF originals and optional Vertex AI](../assets/architecture.svg)](../assets/architecture.svg)
+```mermaid
+flowchart TB
+    UI["Browser: EN / JA / AR"] --> API["FastAPI on Cloud Run"]
+    API -->|Scoped records and human actions| DB["Firestore"]
+    API -->|Original PDF bytes| PDF["Cloud Storage"]
+    API -->|Bounded question or review context| AI["Vertex AI / Gemini"]
+    AI -->|Selected IDs or review candidates| API
+    API -->|Validated facts and source references| UI
+```
 
-The diagram describes the deployed prototype's component arrangement. Implementation details were checked against the retained **v0.4.11** source package. The public interface identifies itself as **v0.4.12**, with Japanese record and scheduling changes.
+The diagram describes **v0.5.2**, checked against the retained RC9 implementation and publication record. RC9 updates the localized file picker; RC7–RC8 update sidebar branding. The question-answering implementation and its separate test results are described in [validation](validation.md).
 
 | Component | Responsibility | Data or boundary |
 | --- | --- | --- |
-| React / TypeScript / Vite | Care-team and patient views; PDF comparison with locally served PDF.js assets | Shared records across English, Japanese and Arabic. The role selector chooses a demo persona. |
+| React / TypeScript / Vite | Worklist and case questions, care-team and patient views, PDF comparison with locally served PDF.js assets | Shared records across English, Japanese and Arabic. The role selector chooses a demo persona. |
 | FastAPI on Cloud Run | Session scoping, role/action and revision checks, rules, decisions and closure | Application hosted in Tokyo (`asia-northeast1`). Browser state cannot authorize closure. |
 | Firestore | Case/workspace state, evidence references, decision history, extraction metadata and resource records | Case and workspace revisions detect conflicting changes. Runtime access uses a service account. |
 | Cloud Storage | Original PDF bytes | Create-only uploads, pinned object generations and hash checks. Originals are retrieved through the scoped API. |
-| Vertex AI / Gemini, optional | Source quotations and proposed review items | Documented model: `gemini-3.1-flash-lite`; global endpoint. No direct workflow, database or closure access. |
+| Vertex AI / Gemini | Select relevant records and original passages for natural-language questions; optionally propose source-linked review items | Documented model: `gemini-3.1-flash-lite`; global endpoint. No direct workflow, database or closure access. |
 
-Solid connections show the normal application path; dashed connections show explicitly requested AI calls. Tokyo hosting and global model routing are separate settings. UAE-only data residency is not claimed. SQL and the Firestore emulator are test/development backends, not additional databases in this deployment.
+The model receives bounded context from the API and returns selections or candidates to that API. It has no direct connection to Firestore or Cloud Storage. Tokyo hosting and global model routing are separate settings. UAE-only data residency is not claimed. SQL and the Firestore emulator are test/development backends, not additional databases in this deployment.
 
 ## From a PDF to a decision
 
@@ -31,7 +39,7 @@ Solid connections show the normal application path; dashed connections show expl
 5. **Confirm and close.** Record procedure evidence, result/plan review, explanation and action completion. The API requires a current review and all applicable conditions before accepting closure.
 6. **Reconsider changes.** Adding clinical evidence, including a correction, clears procedure, result-review and plan-communication confirmations. A closed case becomes `review_required`. Decisions bound to an older source set need renewed review; previous decisions remain in history.
 
-CL-001 preserves three different facts: a visit without the procedure, a later report of completion, and a correction of that later report. The correction must not be attached to the earlier truthful report.
+The main walkthrough follows **CL-006**: an earlier closure remains in history after a correction states that only a consultation occurred and the required procedure was not performed. Three dependent confirmations become invalid; three remain valid. The separate CL-001 PDF exercise demonstrates adding a later event before correcting that later report. The correction names the report being corrected.
 
 ## Records and relationships
 
@@ -39,7 +47,7 @@ The following table describes logical application records.
 
 | Record | Main fields and links | Purpose |
 | --- | --- | --- |
-| Workspace | Expiry, workspace revision, four fictional cases | Separate browser-session copies; expiry is distinct from deletion. |
+| Workspace | Expiry, workspace revision, initial examples and explicit expansion to 300 synthetic follow-up records | Separate browser-session copies; expiry is distinct from deletion. A record count is not a distinct-patient count. |
 | Case | Patient reference, revision, current/pending owner, pathway, status, next action | Preserve responsibility and unfinished work. |
 | PDF extraction | Original hash/generation, page text and hashes, extractor/version | Check originals and extracted text independently. |
 | Evidence | ID, text hash, version, `supersedes`, PDF reference, comparison record | Change active sources without overwriting originals. |
@@ -49,7 +57,19 @@ The following table describes logical application records.
 
 PDF quotations can carry page numbers and character offsets. A hash checks byte/text consistency; it does not authenticate a report issuer or prove a medical finding.
 
-## AI input, output and authority
+## Natural-language questions with Gemini
+
+Staff can ask about the selected case or the authorized worklist in English, Japanese or Arabic. Examples include “Why does this case need review again?”, “Which checks are outstanding?” and “Who owns the next action, and when is it due?”
+
+1. The server applies the session, case or worklist-filter scope and builds record blocks, computed totals and a source catalog. Individual source detail is bounded; the answer reports coverage limits.
+2. Gemini interprets the free-text question, including paraphrases and combined questions, and selects supplied block IDs and original-passage IDs. It does not supply replacement facts, labels, dates, counts or invented quotations.
+3. The server validates those selections and composes the answer from recorded values and exact source passages. References distinguish active and superseded evidence and connect the correction with the earlier human decision. The answer displays the records-checked time and source scope.
+4. Missing information, conflicting sources and unsupported requests are surfaced. A currently invalid confirmation is not proof that care did not occur; such a statement must come from an identified source.
+5. Asking a question does not change case records or authorize closure. The server checks for record changes during answering and rejects a stale result. AI execution and resource-use records are recorded separately.
+
+Workspace totals are computed from the authorized scope. Individual explanations cover a bounded selection and are not a complete clinical review of all 300 records. Selecting a case makes its original evidence available for questions about source wording. The patient demo role cannot query staff worklists.
+
+## Optional evidence review: input, output and authority
 
 | Stage | Implemented behaviour |
 | --- | --- |
@@ -59,7 +79,7 @@ PDF quotations can carry page numbers and character offsets. A hash checks byte/
 | Authority | The model cannot write case state, decide diagnosis/treatment/urgency, or approve closure. The deterministic workflow enforces requirements. |
 | Failure | Invalid or incomplete output is an error, not an empty successful review. Zero findings does not establish completeness. |
 
-The core walkthrough works with rules alone. Neither source matching nor AI proposals are clinically validated classifiers.
+The evidence and closure workflow can use rules without Gemini. Natural-language questions require the configured Gemini service. Neither source matching, question answers nor review proposals are clinically validated classifiers.
 
 ## Workflow rules
 
@@ -75,6 +95,6 @@ The six visible checks cover patient acknowledgement, clinician consultation, pr
 
 ## Language and time
 
-In the observed v0.4.12 interface, Japanese schedules use **Asia/Tokyo (UTC+9)**; English and Arabic use **Asia/Dubai (UTC+4)**. Schedules are stored as timezone-aware UTC values. Localization does not rewrite uploaded originals or a user's original-language message. Arabic uses right-to-left layout; specialist-language validation is outstanding.
+In the v0.5.2 interface, Japanese schedules use **Asia/Tokyo (UTC+9)**; English and Arabic use **Asia/Dubai (UTC+4)**. Schedules are stored as timezone-aware UTC values. Localization does not rewrite uploaded originals or a user's original-language message. Arabic uses right-to-left layout; specialist-language validation is outstanding.
 
 See the [hands-on guide](demo-guide.md) for the walkthrough and [controls and operations](security-and-operations.md) for access, retention and deployment limits.

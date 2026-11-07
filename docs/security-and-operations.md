@@ -2,14 +2,14 @@
 
 [Home](../README.md) · [日本語](security-and-operations.ja.md) · [Architecture](architecture.md) · [Validation](validation.md)
 
-This public service is a **synthetic demonstration**. The controls below describe the retained v0.4.11 implementation and documented deployment, not a certification or an independent security assessment. The v0.4.12 interface has a separately scoped availability/localization check.
+This public service is a **synthetic demonstration**. The controls below were checked against the retained v0.5.2 RC9 implementation and publication records. They are not a certification or an independent security assessment. Historical deployment exercises and estimates are labeled separately.
 
 ## Access boundaries
 
 | Boundary | Implemented control | Limit |
 | --- | --- | --- |
 | Browser session | Random session token in an HttpOnly, SameSite=Strict cookie; Secure on HTTPS. Server stores its hash. | Possession of the session is not verified personal identity. Tabs in one profile share it. |
-| Workspace | A copy of four fictional cases; case/document/resource lookups are scoped to the session. | The public demo is not a hospital tenant or patient identity system. |
+| Workspace | Session-owned examples with an explicit 300-record expansion; case/document/resource lookups are scoped to that session. | The public demo is not a hospital tenant or patient identity system. |
 | Operation | Server checks the selected persona against allowed actions. | Persona selection does not verify clinician qualifications or facility membership. |
 | Update | Expected case/workspace revisions and atomic compare-and-set writes | A stale operation is rejected; the user must reload and reconsider. |
 | Browser request | Exact-origin checks on mutations and bounded request sizes | These controls do not replace production authentication or a penetration test. |
@@ -19,6 +19,7 @@ This public service is a **synthetic demonstration**. The controls below describ
 
 | Operation | Coordinator | Clinician | Patient |
 | --- | :---: | :---: | :---: |
+| Ask the record in natural language | Yes | Yes | No |
 | Import/register evidence, run review, record/complete next action | Yes | Yes | No |
 | Request/accept/reject a demo handoff | Yes | Yes | No |
 | Record consultation, procedure evidence and result review | No | Yes | No |
@@ -35,23 +36,24 @@ These are action permissions for a simulation. Switching roles is possible withi
 - **Corrections:** retain superseded reports and earlier closure/history. New evidence clears dependent confirmations. A source-set change makes earlier candidate decisions stale.
 - **History:** actions include the demo identity status and a chained hash. This detects consistency failures; it is not externally anchored, tamper-proof clinical audit storage.
 - **Expiry:** a reviewer workspace lasts 24 hours. Expiry denies further session access; it does **not** automatically delete its records or originals. This demo has no automatic erasure promise. Retention, deletion and subject-access processes must be agreed before any real deployment.
-- **AI:** an explicit Gemini action sends current evidence text and relevant current reconciliation to Vertex AI's global endpoint. Rules-only review avoids that model request. Do not put real patient data in either path.
+- **AI:** a natural-language question sends bounded, scoped record blocks, computed totals, relevant history and original-source passages to the configured Gemini service. Optional evidence review sends the current evidence and relevant reconciliation. The documented deployment uses Vertex AI's global endpoint. Rules-only review avoids that model request. Only synthetic data is allowed.
+- **Answers:** the model selects supplied identifiers; the server validates selections and binds displayed facts and quotations to the records. Answers include source references, checked time and coverage limits. Asking is read-only for case data, while execution and resource-use logs are stored. The patient demo role is denied staff-worklist questions.
 - **Communication:** messages, support preferences and simulated handoffs are recorded inside CareLoop. No SMS, email, booking or provider message is sent.
 
 ## Dependencies and capacity
 
-The documented public service uses Cloud Run, Firestore, Cloud Storage and optional Vertex AI. The frontend is React/TypeScript; the service is FastAPI/Python; PDF text extraction uses pypdf and preview uses PDF.js. Original storage must be available for PDF import; Vertex access is needed only for Gemini review. No OCR is integrated.
+The documented public service uses Cloud Run, Firestore, Cloud Storage and optional Vertex AI. The frontend is React/TypeScript; the service is FastAPI/Python; PDF text extraction uses pypdf and preview uses PDF.js. Original storage must be available for PDF import; Vertex access is needed for natural-language questions and Gemini evidence review. No OCR is integrated.
 
-The retained deployment setting is **1 CPU / 512 MiB, minimum 1 and maximum 2 Cloud Run instances**, with request-based billing and an HTTP health startup probe. Shared admission limits allow one heavy PDF/AI operation at a time. Scaling the container alone does not remove that shared limit.
+The retained deployment setting, also referenced by the current admission control, is **1 CPU / 512 MiB, minimum 1 and maximum 2 Cloud Run instances**, with request-based billing and an HTTP health startup probe. Shared admission limits allow one heavy PDF/AI operation at a time. Scaling the container alone does not remove that shared limit.
 
-| Limit in the v0.4.11 snapshot | Per workspace / request | Lifetime service setting |
+| Limit in the v0.5.2 RC9 source | Per workspace / request | Lifetime service setting |
 | --- | --- | --- |
 | Workspace | 24 hours; 100 successful updates | 250 created workspaces |
 | PDF import | 3 imports / 20 MB total; each PDF ≤10 MB and ≤20 pages | 500 imports / 2.5 GB |
-| AI review | 8 calls / 200 KB input total; one input ≤32,000 bytes | 1,200 calls / 25 MB input |
+| AI questions and review, sharing one budget | 8 attempts / 200 KB input total; one input ≤32,000 bytes | 1,200 calls / 25 MB input |
 | Original PDF retrieval | 30 requests / 100 MB | 1,500 requests / 12 GB |
 
-These are configured ceilings, not the current remaining allowance, concurrent-user capacity or a service-level commitment. Failed work may consume a reservation. Expiry/restarts do not reset lifetime counters. Do not create repeated workspaces to work around a limit.
+These are configured ceilings, not the current remaining allowance, concurrent-user capacity or a service-level commitment. Failed work and automatic recovery attempts may consume a reservation. Question answering permits at most two attempts within a 70-second server deadline. This bounds retry work; it does not guarantee successful recovery. Expiry/restarts do not reset lifetime counters. Do not create repeated workspaces to work around a limit.
 
 ### Failure and recovery
 
@@ -60,7 +62,9 @@ These are configured ceilings, not the current remaining allowance, concurrent-u
 | Revision conflict | Reload and review the current case before retrying an action. |
 | Unreadable, encrypted or oversized PDF | Reject import; do not silently use OCR or register unverified text. |
 | Failed PDF storage or integrity check | Report failure; do not present successful registration or an unchecked original. |
-| Model timeout/invalid response | Report the failure and retain existing case records; do not claim successful AI review. |
+| Question timeout, incomplete selection or selected recoverable provider error | Attempt bounded recovery when time and resource budget permit; otherwise report failure and preserve case data. |
+| Records change during an answer | Reject the stale answer and ask again against current records. |
+| Invalid evidence-review response | Report failure; do not turn invalid output into a successful empty review. |
 | Resource limit or expired session | Preserve records; stop the affected operation. Follow the displayed session guidance or contact SOLIFAN. |
 
 A prior v0.4.10 recovery exercise restored application records and original object generations into an isolated environment. It was **not** a fresh-cloud-project IAM/billing/DNS failover. No uptime or disaster-recovery target has been validated for this public demo.
