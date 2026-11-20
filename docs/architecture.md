@@ -6,17 +6,9 @@ CareLoop connects source documents, accountable teams and human decisions in a s
 
 ## System architecture
 
-```mermaid
-flowchart TB
-    UI["Browser: EN / JA / AR"] --> API["FastAPI on Cloud Run"]
-    API -->|Scoped records and human actions| DB["Firestore"]
-    API -->|Original PDF bytes| PDF["Cloud Storage"]
-    API -->|Bounded question or review context| AI["Vertex AI / Gemini"]
-    AI -->|Selected IDs or review candidates| API
-    API -->|Validated facts and source references| UI
-```
+[![CareLoop system architecture. Staff and patients use a browser. FastAPI stores records in Firestore and PDFs in Cloud Storage, sends selected records to Gemini and checks the conditions for clinician-approved closure.](../assets/architecture.svg)](../assets/architecture.svg)
 
-The v0.5.2 RC32 service uses this architecture for both individual cases and worklist questions. The [validation record](validation.md) identifies the release tested for each workflow.
+In RC32, FastAPI reads and writes case records in Firestore and original PDFs in Cloud Storage. For a question about a case or the patient list, Gemini selects relevant records from those the user can view. The API checks the selection and returns the answer with its sources. A clinician approves closure, and the API checks the requirements before saving that decision. The [validation record](validation.md) identifies the release tested for each workflow.
 
 | Component | Responsibility | Data or boundary |
 | --- | --- | --- |

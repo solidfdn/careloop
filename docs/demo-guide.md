@@ -12,6 +12,8 @@ Use this workspace for the whole walkthrough. Changes are saved in the browser�
 2. Open **Result delivery record** under the patient’s name. The colonoscopy was performed, the expected delivery date has passed, and the patient has not received the result. The video follows the same link from a Gemini review candidate to the supporting passage.
 3. Open **Care pathway** and find **Next action and pathway**. There is already an open action. Once the work it describes is done in your exercise, use **Complete next action** and record what was done. Use **Record next action** to save the team, the next step and its scheduled time. The video assigns **Screening coordination** to check delivery with the clinic and contact the patient. Read back the saved plan.
 
+[![CL-015. A Gemini review item quotes the passage about the overdue result and links to the delivery record.](../assets/cl015-review.en.png)](../assets/cl015-review.en.png)
+
 To see how ownership changes, open **CL-002 / Samira Noor** from the patient list. Before acceptance, Screening coordination is responsible for the referral. Select **Accept handoff** and check that **Specialist clinic B** is now accountable and follow-up is still open.
 
 ## Follow a missed appointment through to the patient’s reply
@@ -22,6 +24,8 @@ To see how ownership changes, open **CL-002 / Samira Noor** from the patient lis
 4. Switch to **Care coordinator**, return to the worklist and open **Ask the records**. If filters are active, choose **Full patient list**. Ask *How many patients are still waiting for an explanation?* The starting list has 29 patients with an open request. Recording Omar’s request brings the answer to **30 of 300 patients** in this walkthrough. Open the matching follow-up records from the answer and find Omar. The answer counts patients once; the linked list includes each matching follow-up record.
 5. Open Omar’s **Contact** tab. His question is above the reply field. Tell him which team will call and when, using the time you recorded, and post the reply. Switch back to **Patient** to read what he received.
 
+[![CL-025. Before replying, the coordinator can read Omar’s question about who will call to rebook.](../assets/cl025-patient-question.en.png)](../assets/cl025-patient-question.en.png)
+
 ## Review a correction and the earlier closure decision
 
 From **All patients**, search for **CL-006** and select **Kenji Morgan (SYN-006)**. This prepared case shows what happens when a report changes after closure.
@@ -30,7 +34,7 @@ From **All patients**, search for **CL-006** and select **Kenji Morgan (SYN-006)
 2. Open **Outstanding items and evidence**. Three of six confirmations remain current: patient acknowledgement, clinical consultation and referral acceptance. Procedure evidence, clinician result review and plan communication require renewed confirmation. The previous closure decision remains in the history.
 3. In **Ask the record**, enter *Why does this case need review again?* Check **Sources for this answer** and **Records checked at**. Follow a citation back to the source. You can also ask *Who owns the next action, and when is it due?* At the start of this example **Follow-up team A** is accountable, with no open next action scheduled.
 
-[![Example of a cited answer for CL-006](../assets/careloop-question.en.png)](../assets/careloop-question.en.png)
+[![CL-006. The current correction names the earlier report and records a consultation, an unperformed procedure and the need to rebook.](../assets/cl006-correction.en.png)](../assets/cl006-correction.en.png)
 
 ## Optional PDF exercise for CL-001
 

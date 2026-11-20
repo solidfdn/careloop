@@ -10,7 +10,7 @@ A test can be complete while the patient is still waiting for the result. A miss
 
 The **v0.5.2 RC32** workspace opens with 300 patients created for this colorectal screening follow-up demo. In a fresh workspace, 182 patients have active follow-up. Select a queue to open its patient list. The same patient may need more than one kind of follow-up.
 
-[![The CareLoop worklist showing 300 patients, follow-up priorities and the patient list](assets/worklist.en.jpg)](assets/worklist.en.jpg)
+[![CareLoop worklist with 182 of 300 patients in active follow-up, priorities and the list of patients.](assets/worklist.en.jpg)](assets/worklist.en.jpg)
 
 | Start here | What to look for |
 | --- | --- |
@@ -24,9 +24,11 @@ The [hands-on guide](docs/demo-guide.md) follows these cases in order. It also s
 
 CareLoop links source documents, review decisions, the accountable team and the next action. The referring team stays accountable until the receiving team accepts the handoff. The patient can record what needs explaining in their own words, and the care team can reply in the same case.
 
-Gemini helps staff ask questions about the records and identify passages that may need review. Staff can inspect the supporting material, including where a fact is missing or records conflict. The API checks the workflow conditions. A person reviews the evidence and authorizes closure.
+Gemini helps staff ask questions about the records and identify passages that may need review. Staff can inspect the supporting material, including where a fact is missing or records conflict. The API checks the workflow conditions. A clinician reviews the evidence and approves closure.
 
 ## Technical reference
+
+[![CareLoop system architecture. Staff and patients use a browser. FastAPI stores records in Firestore and PDFs in Cloud Storage, sends selected records to Gemini and checks the conditions for clinician-approved closure.](assets/architecture.svg)](assets/architecture.svg)
 
 | Document | Purpose |
 | --- | --- |

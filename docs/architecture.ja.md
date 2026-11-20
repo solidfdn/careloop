@@ -6,17 +6,9 @@ CareLoopは、健診後の経路に資料、担当チーム、人の判断を結
 
 ## システム構成
 
-```mermaid
-flowchart TB
-    UI["ブラウザ: 英・日・アラビア語"] --> API["Cloud Run上のFastAPI"]
-    API -->|権限内の記録と人の操作| DB["Firestore"]
-    API -->|PDF原本| PDF["Cloud Storage"]
-    API -->|範囲を限定した質問・資料| AI["Vertex AI / Gemini"]
-    AI -->|選択したID・確認候補| API
-    API -->|検証した記録の値と参照元| UI
-```
+[![CareLoopの構成図。担当者と患者はブラウザを使用。FastAPIが症例記録とPDFを別々に保存し、対象の記録をGeminiに渡します。フォローの終了は医師が承認します。](../assets/architecture.ja.svg)](../assets/architecture.ja.svg)
 
-この構成はv0.5.2 RC32の症例画面と一覧からの質問に共通します。各操作を確認した版と結果は[検証記録](validation.ja.md)に掲載しています。
+RC32では、FastAPIがFirestoreの症例記録とCloud StorageのPDFを読み書きします。症例や患者一覧について質問すると、Geminiが利用者の閲覧できる記録から該当箇所を選び、APIが照合して根拠付きの回答を返します。フォローの終了は医師が承認し、APIが必要条件を確認して判断を記録します。各操作を確認した版と結果は[検証記録](validation.ja.md)に掲載しています。
 
 | 構成要素 | 役割 | データと境界 |
 | --- | --- | --- |
