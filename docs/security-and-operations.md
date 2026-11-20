@@ -2,14 +2,14 @@
 
 [Home](../README.md) · [日本語](security-and-operations.ja.md) · [Architecture](architecture.md) · [Validation](validation.md)
 
-This public service is a **synthetic demonstration**. The controls below were checked against the retained v0.5.2 RC9 implementation and publication records. They are not a certification or an independent security assessment. Historical deployment exercises and estimates are labeled separately.
+The public workspace contains records created for the demo. The controls and limits below describe v0.5.2 RC32. Historical deployment exercises and cost estimates are dated separately.
 
 ## Access boundaries
 
 | Boundary | Implemented control | Limit |
 | --- | --- | --- |
 | Browser session | Random session token in an HttpOnly, SameSite=Strict cookie; Secure on HTTPS. Server stores its hash. | Possession of the session is not verified personal identity. Tabs in one profile share it. |
-| Workspace | Session-owned examples with an explicit 300-record expansion; case/document/resource lookups are scoped to that session. | The public demo is not a hospital tenant or patient identity system. |
+| Workspace | A new reviewer session starts with 300 demonstration patients. Case, document and resource requests use that session’s records. | The demo does not verify hospital membership or patient identity. |
 | Operation | Server checks the selected persona against allowed actions. | Persona selection does not verify clinician qualifications or facility membership. |
 | Update | Expected case/workspace revisions and atomic compare-and-set writes | A stale operation is rejected; the user must reload and reconsider. |
 | Browser request | Exact-origin checks on mutations and bounded request sizes | These controls do not replace production authentication or a penetration test. |
@@ -46,9 +46,9 @@ The documented public service uses Cloud Run, Firestore, Cloud Storage and optio
 
 The retained deployment setting, also referenced by the current admission control, is **1 CPU / 512 MiB, minimum 1 and maximum 2 Cloud Run instances**, with request-based billing and an HTTP health startup probe. Shared admission limits allow one heavy PDF/AI operation at a time. Scaling the container alone does not remove that shared limit.
 
-| Limit in the v0.5.2 RC9 source | Per workspace / request | Lifetime service setting |
+| Configured limit in v0.5.2 RC32 | Per workspace / request | Lifetime service setting |
 | --- | --- | --- |
-| Workspace | 24 hours; 100 successful updates | 250 created workspaces |
+| Workspace | 24 hours, 100 successful updates | 1,000 created workspaces |
 | PDF import | 3 imports / 20 MB total; each PDF ≤10 MB and ≤20 pages | 500 imports / 2.5 GB |
 | AI questions and review, sharing one budget | 8 attempts / 200 KB input total; one input ≤32,000 bytes | 1,200 calls / 25 MB input |
 | Original PDF retrieval | 30 requests / 100 MB | 1,500 requests / 12 GB |

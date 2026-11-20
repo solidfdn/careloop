@@ -1,10 +1,15 @@
 # Validation and evidence
 
-[Home](../README.md) · [日本語](validation.ja.md) · [Current verification summary](../evidence/careloop-v0.5.2-verification.json)
+[Home](../README.md) · [日本語](validation.ja.md) · [RC4–RC9 verification record](../evidence/careloop-v0.5.2-verification.json)
 
-The hosted prototype is **CareLoop v0.5.2 RC9**. Its evidence includes a **1,247-test backend run on RC4**, a later **144-test answer-function run on RC6**, real Gemini question checks and the RC9 interface checks. Each result below retains its tested version and scope. The counts overlap and must not be added together; the full backend suite was not rerun on RC9.
+The v0.5.2 RC32 walkthrough follows two patients, one waiting for test results (CL-015) and one who missed an appointment (CL-025). The checks below identify the version and workspace used. Counts from earlier suites have overlapping coverage and are reported separately.
 
-## Versioned results
+## RC32 walkthrough · 20 November 2026
+
+- **Result delivery and missed appointment.** The reviewer entry links to the corresponding work queues. For CL-015, the reviewer can open the dated evidence of the undelivered result and record the responsible team and next action. For CL-025, the reviewer can inspect the attendance record, record a call to arrange a new booking, and answer the patient’s question in the app.
+- **Worklist count.** After the patient in CL-025 requested clarification, the Japanese workspace returned 30 patients awaiting further explanation out of 300. The answer linked to 30 follow-up records. Their case identifiers matched the list, including CL-025. This is the recorded state after that action. Another workspace can show a different count.
+
+## Earlier versioned results
 
 | Evidence | Tested version / date | Recorded result | What it establishes within the exercised scope |
 | --- | --- | --- | --- |
@@ -12,12 +17,12 @@ The hosted prototype is **CareLoop v0.5.2 RC9**. Its evidence includes a **1,247
 | Real Gemini questions and source review | RC4; 5 November | 46 inputs passed automated checks and a separate review of their recorded answers | Requested facts, exact source passages, citations, missing information, conflicting sources and the distinction between current confirmations and historical decisions. The set comprised 36 repeated development inputs and 10 additional inputs defined before execution. |
 | Hosted API checks | RC4; 5 November | 21 checks passed over 54 requests; no AI calls | Access and revision boundaries, history pagination, original PDF bytes, extraction/registration separation and record preservation during reads. |
 | Answer-function regression | v0.5.2 RC6; 7 November | 144 tests; 0 failures, errors or skips | Concise answers and the existing selection, citation, detail, refusal and recovery boundaries. |
-| Real Gemini questions for the completed demo | RC6; 7 November | 7 inputs passed: English 3, Japanese 2, Arabic 2 | CL-006 reason questions, paraphrases and a combined reason/owner/next-action question. Answers contained 5–6 references; the case record hash was unchanged after the run. |
+| Real Gemini questions for the CL-006 walkthrough | RC6; 7 November | 7 inputs passed: English 3, Japanese 2, Arabic 2 | CL-006 reason questions, paraphrases and a combined reason/owner/next-action question. Answers contained 5–6 references; the case record hash was unchanged after the run. |
 | Interface and publication checks | v0.5.2 RC9; 7 November | Build, copy checks, question-UI checks and EN/JA/AR file-picker checks passed | Language-appropriate file selection, hidden patient upload, empty-state behaviour and matching published asset bytes. |
 
 The [machine-readable summary](../evidence/careloop-v0.5.2-verification.json) contains test-module counts, source-report hashes and the boundaries of each run. It is a sanitized summary of retained developer records, not an independently certified test report.
 
-For this documentation update, unauthenticated GET requests to `/health`, `/entry/`, `/?lang=en` and `/?lang=ja` returned HTTP 200. Health identified v0.5.2 RC9 in synthetic-demo mode. This availability check made no AI calls or record-changing API requests.
+During the RC9 publication check, unauthenticated requests to the health endpoint, reviewer entry and English and Japanese workspaces returned HTTP 200. This check made no AI calls or record changes.
 
 ## What was checked for natural-language questions
 
@@ -25,11 +30,11 @@ Gemini interprets a free-text question and selects relevant supplied record bloc
 
 The recorded checks cover source attribution, absent requested details, active versus superseded sources, current responsibility versus a proposed recipient, and requests that would change records. Asking a question does not approve closure or perform a workflow action. A missing confirmation is not, by itself, proof that care did not occur.
 
-The RC6 CL-006 examples match the completed video: a correction states that only consultation occurred, three confirmations need renewed review, and the earlier closure decision remains in history. A combined question also identifies Follow-up team A and states that the next action and its due date are not recorded.
+In the RC6 CL-006 walkthrough, a correction states that only consultation occurred, three confirmations need renewed review, and the earlier closure decision remains in history. A combined question also identifies Follow-up team A and states that the next action and its due date are not recorded.
 
 ## How the evidence relates to RC9
 
-The 65 backend Python files in the retained RC6 source snapshot match the current RC9 snapshot byte for byte. The recorded hashes of the question service and question UI also match RC9. Subsequent changes concerned the sidebar logos and file-picker interface. RC9's build, language and question-UI checks passed after those changes.
+The 65 backend Python files in the retained RC6 source snapshot match the retained RC9 snapshot byte for byte. The recorded hashes of the question service and question UI also match RC9. Subsequent changes concerned the sidebar logos and file-picker interface. RC9's build, language and question-UI checks passed after those changes.
 
 This continuity supports applying the RC6 answer evidence to the unchanged components. It does not turn either earlier suite into a new full RC9 test run. During development, a separate provider rate-limit response was observed and a later retry recovered; the seven successful inputs are not an uptime or all-request success-rate claim.
 
@@ -43,7 +48,7 @@ Earlier results remain available for traceability:
 | [Backend module counts](../evidence/backend-regression-v0.4.11.json) | v0.4.11; 2 November | 1,011 tests, with zero failures, errors and skips. Historical regression evidence. |
 | [Earlier combined summary](../evidence/technical-verification-20261103.json) | Historical versions recorded in the file | Earlier API and browser checks. This is not the current release summary. |
 
-The old CL-001 PDF flow and the current CL-006 video are different demonstrations. The [current guide](demo-guide.md) begins with CL-006 and keeps the optional PDF exercise separate.
+The [hands-on guide](demo-guide.md) starts with CL-015 and CL-025. The CL-006 correction scenario and CL-001 PDF exercise remain available separately.
 
 ## Reproduction and limits
 

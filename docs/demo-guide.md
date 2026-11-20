@@ -1,156 +1,47 @@
 # CareLoop hands-on guide
 
-[Home](../README.md) · [日本語](demo-guide.ja.md) · [Demo video](https://youtu.be/y_zqr-R8R3g)
+[Home](../README.md) · [日本語](demo-guide.ja.md) · [English walkthrough](https://raw.githubusercontent.com/solidfdn/careloop/main/assets/careloop-demo-en.mp4) · [Live demo](https://careloop-demo-864232222461.asia-northeast1.run.app/entry/)
 
-Follow **CL-006 / Kenji Morgan / SYN-006**, the case used in the completed demonstration. Start by inspecting the correction, ask why review is needed, and trace the answer to the responsible team and next action. The current application is **v0.5.2 (RC9)**. Use synthetic data only.
+Open the [English workspace](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en) as **Care coordinator**. The RC32 worklist contains 300 patients created for this colorectal screening follow-up demo. In a fresh workspace, 182 have active follow-up. Select a work queue to see its patients. A patient can appear in several queues. P1–P4 count follow-up records by priority.
 
-## Open the demonstrated case
+Use this workspace for the whole walkthrough. Changes are saved in the browser’s reviewer session and messages stay in CareLoop. For a fresh run, use a new browser profile or private session. Tabs in the same session share the changes. The reviewer session lasts 24 hours.
 
-1. Open the [English workspace](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en). Select **Care coordinator** under **Operating role**.
-2. A new workspace starts with four cases. If **CL-006** is not present, click **Explore 300 patients** on the worklist. This explicitly adds the demonstration records and preserves the original four. If the workspace already has 300 records, continue directly.
-3. Select **All records**, clear any restrictive filters, search for **CL-006**, then open **Kenji Morgan**.
+## Follow a test result that has not reached the patient
 
-An independent trial needs a separate browser profile or private window. Tabs in the same profile share the workspace. A session lasts 24 hours; after expiry, use **Start a new workspace** when the application offers it. **Back to overview** returns to the list without resetting the data. Dates, counts and revisions can differ after other actions. Operating roles are demonstration personas, not verified clinical identities.
+1. Open [Follow up on undelivered results](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en&queue=result_waiting) and select **Rami Morgan (CL-015)**.
+2. Open **Result delivery record** under the patient’s name. The colonoscopy was performed, the expected delivery date has passed, and the patient has not received the result. The video follows the same link from a Gemini review candidate to the supporting passage.
+3. Open **Care pathway** and find **Next action and pathway**. There is already an open action. Once the work it describes is done in your exercise, use **Complete next action** and record what was done. Use **Record next action** to save the team, the next step and its scheduled time. The video assigns **Screening coordination** to check delivery with the clinic and contact the patient. Read back the saved plan.
 
-## 1. Inspect the earlier closure and the correction
+To see how ownership changes, open **CL-002 / Samira Noor** from the patient list. Before acceptance, Screening coordination is responsible for the referral. Select **Accept handoff** and check that **Specialist clinic B** is now accountable and follow-up is still open.
 
-Open **History**. Expand the record details for the earlier **Close pathway** event, then inspect the later evidence event. The previous closure remains a historical decision.
+## Follow a missed appointment through to the patient’s reply
 
-Open **Evidence** and expand **Correction to procedure completion report** (`EV-SCALE-006-02`). It corrects `EV-SCALE-006-01`. The active source states:
+1. Open [Follow up on missed appointments](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en&queue=missed_appointment) and select **Omar Sato (CL-025)**. Open **Appointment attendance record**. It records a missed visit and confirms that no replacement appointment has been booked.
+2. In **Contact**, write to Omar under **Message the patient** and choose **Post to patient conversation**. In **Care pathway**, record the outcome of the existing action when completed. Then schedule the call to arrange a new visit. In the video, **Follow-up team A** owns the call. The scheduled time is for the callback.
+3. With Omar’s record selected, switch the operating role to **Patient**. The team’s message is above the response field. Choose **I would like more explanation**, select **Appointment details**, enter *Should I call the clinic to rebook, or will someone call me?*, and select **Record response**.
+4. Switch to **Care coordinator**, return to the worklist and open **Ask the records**. If filters are active, choose **Full patient list**. Ask *How many patients are still waiting for an explanation?* The starting list has 29 patients with an open request. Recording Omar’s request brings the answer to **30 of 300 patients** in this walkthrough. Open the matching follow-up records from the answer and find Omar. The answer counts patients once; the linked list includes each matching follow-up record.
+5. Open Omar’s **Contact** tab. His question is above the reply field. Tell him which team will call and when, using the time you recorded, and post the reply. Switch back to **Patient** to read what he received.
 
-> Patient SYN-006. Correction: consultation only. Required procedure not performed. Rebooking required.
+## Review a correction and the earlier closure decision
 
-The original report remains available as a superseded source. In this seeded example, the source text explicitly says the required procedure was not performed; an unconfirmed checkbox by itself would not establish that fact.
+From **All patients**, search for **CL-006** and select **Kenji Morgan (SYN-006)**. This prepared case shows what happens when a report changes after closure.
 
-## 2. See which confirmations require review
+1. In **History**, find the earlier closure and the later correction. In **Evidence**, expand **Correction to procedure completion report** (`EV-SCALE-006-02`) and compare it with the report it corrects (`EV-SCALE-006-01`). The correction says that only the consultation took place, the required procedure was not performed and rebooking is needed.
+2. Open **Outstanding items and evidence**. Three of six confirmations remain current: patient acknowledgement, clinical consultation and referral acceptance. Procedure evidence, clinician result review and plan communication require renewed confirmation. The previous closure decision remains in the history.
+3. In **Ask the record**, enter *Why does this case need review again?* Check **Sources for this answer** and **Records checked at**. Follow a citation back to the source. You can also ask *Who owns the next action, and when is it due?* At the start of this example **Follow-up team A** is accountable, with no open next action scheduled.
 
-Open **Outstanding items and evidence**. Inspect **Current status of the six required confirmations**.
+[![Example of a cited answer for CL-006](../assets/careloop-question.en.png)](../assets/careloop-question.en.png)
 
-| Confirmation | Starting CL-006 state |
-| --- | --- |
-| Patient acknowledgement | Confirmed |
-| Clinical consultation | Confirmed |
-| Procedure evidence | Previous confirmation invalidated |
-| Clinician result review | Previous confirmation invalidated |
-| Plan communicated | Previous confirmation invalidated |
-| Referral accepted | Confirmed |
+## Optional PDF exercise for CL-001
 
-Three of six remain valid. **Care pathway** also shows the 3/6 checklist and the previous closure record. The case is **Review required**. The record must satisfy the current closure conditions before a clinician can close it again.
+Select **Clinician** and open **CL-001 / Alex Morgan / SYN-001**. Use the two PDFs prepared for this patient. [Later completion report](../demo-data/CareLoop_Demo_Completed_SYN001_v1.pdf) · [Correction report](../demo-data/CareLoop_Demo_Correction_SYN001_v1.pdf) · [Fixture details and checksums](../demo-data/README.md)
 
-## 3. Ask Gemini about the record
+1. **Inspect the starting evidence.** In **Evidence**, read **Specialist visit report**. It records consultation only, an outstanding colonoscopy and the need to rebook. In **Care pathway**, select **Rules baseline** and **Check evidence**. Review the cited passage and closure checklist.
+2. **Record the next action.** Select **Record next action**. For example, assign Screening coordination to obtain and review the later procedure report for SYN-001. Enter a future scheduled time in the time zone shown on the form. Select **Save record**, then check the owner, action and time.
+3. **Add the later report.** Under **PDF to import**, select `CareLoop_Demo_Completed_SYN001_v1.pdf` and click **Import PDF**. Open the PDF and compare it with the extracted text page by page, including the patient reference. Give the evidence a recognizable title. Add it as new evidence, confirm the comparison and select **Register confirmed evidence**. The first visit and the subsequent procedure are separate events.
+4. **Record the human confirmations.** Under **Confirm procedure**, select the later report and explain how it resolves the earlier incomplete finding. Save the confirmation. Use **Complete next action** to record receipt and review of the report, then record the result and plan review and the explanation. Inspect all six closure confirmations.
+5. **Check and close.** Run **Check evidence** again. If review items appear, inspect each quotation and record a judgment, the active source and the reason. Choose **Resolved** for an item the evidence resolves, **Not applicable** where appropriate, or **Action required** for outstanding work. An item requiring action needs an owner and an open next action. When the closure conditions are satisfied, select **Close pathway**, confirm the reason and save. The decision appears in **History**.
+6. **Register the correction.** Import `CareLoop_Demo_Correction_SYN001_v1.pdf` and compare the original with the extracted text. The correction says only the first stage was performed and required steps remain pending. Under **Earlier evidence being corrected**, select the later completion report registered in step 3. Register the correction.
+7. **Check what changed.** Review **Care pathway**, **Evidence** and **History** and run **Check evidence** once more. The case requires renewed review. Procedure evidence, clinician result review and plan communication now require confirmation again. Both PDFs and the earlier closure decision remain accessible. Closure is unavailable while the outstanding conditions remain.
 
-Open **Ask the record** and enter:
-
-**Why does this case need review again?**
-
-Click **Ask**. Read the concise answer, then follow **Sources for this answer** and **Records checked at**. Open **Show answer details and history** when more detail is needed. Source links lead back to the relevant evidence or history in the case.
-
-[![Concise Gemini-supported answer for CL-006](../assets/careloop-question.en.png)](../assets/careloop-question.en.png)
-
-Try another natural-language question, such as:
-
-- **Which checks are still outstanding?**
-- **Who owns the next action, and when is it due?**
-
-Gemini interprets the question and selects relevant supplied record blocks and original passages. The service binds the answer to recorded values, source references and the check time. Missing facts or conflicting active sources are identified. Exact wording can vary with the question; compare the stated facts and citations. Asking does not change the case or authorize an action.
-
-If records have changed, ask again using the latest state. If the AI is unavailable or usage is limited, the application reports that condition and the evidence/history views remain available.
-
-## 4. Identify who acts next
-
-In **Outstanding items and evidence**, inspect **Current accountable owner**, **Awaiting acceptance** and **Next action**.
-
-In the starting CL-006 example, **Follow-up team A** is accountable, no handoff is awaiting acceptance, and **No next action schedule has been recorded**. The system exposes that gap; a staff member decides and records the follow-up separately.
-
-To see the handoff rule, inspect **CL-002**. A proposed receiving team becomes accountable only after accepting the handoff. A request by itself does not transfer ownership.
-
-## 5. Inspect the patient's view
-
-With the intended case selected, open **Patient journey**. Review the next-step guidance, care contact and received documents. To try recording a response, switch **Operating role** to **Patient** and select **I understand the next step** or **I would like more explanation**, optionally add a note, then click **Record response**.
-
-This optional action writes a patient response and changes the case revision. Reading acknowledgement and reported understanding remain separate records. A response does not confirm that an unfinished procedure occurred. Switch back to **Care coordinator** for staff review.
-
-## Questions about the worklist
-
-Return with **Back to overview**. The question panel can address **All workspace records** or **Records matching this list**. Choose the scope before asking a question such as **How many follow-ups need review?** or **Are any next actions overdue?**
-
-Counts refer to follow-up records in the stated scope and time window. Individual detail may be limited when many records match; narrow the list or open a case to inspect its sources. Do not read the displayed record count as a verified count of unique real patients.
-
-## Optional PDF upload and closure exercise: CL-001
-
-The two downloadable PDFs concern **CL-001 / Alex Morgan / SYN-001**, a separate scenario. Do not upload them into CL-006. This exercise shows the actions that produce a closure and then a correction; the main CL-006 walkthrough above inspects an already prepared sequence.
-
-- Select **Clinician** under **Operating role**, then open **CL-001**. If it has already been changed, use an independent workspace for the starting state.
-- Download the [later completion report](https://github.com/solidfdn/careloop/raw/refs/heads/main/demo-data/CareLoop_Demo_Completed_SYN001_v1.pdf) and [correction report](https://github.com/solidfdn/careloop/raw/refs/heads/main/demo-data/CareLoop_Demo_Correction_SYN001_v1.pdf). Keep both unchanged. [Fixture details](../demo-data/README.md) identify their historical labels and checksums.
-- English and Arabic scheduling use **Abu Dhabi time (UTC+4)**; Japanese uses **Japan time (UTC+9)**. Use a future synthetic date in the displayed zone. It is not a clinical deadline.
-
-### 1. Inspect the original source
-
-Select **CL-001**, open **Evidence**, and expand **Specialist visit report**. Read the source statement: consultation only; colonoscopy not performed; rebooking required.
-
-Return to **Care pathway**. Keep **Rules baseline** selected under **Check method**, then click **Check evidence**. Inspect the source quotations and closure checklist. A completed visit does not establish completion of the procedure; closure remains unavailable while requirements are unmet.
-
-### 2. Record the next action
-
-Click **Record next action** and enter:
-
-| Field | Synthetic example |
-| --- | --- |
-| Next-action owner | Screening coordination |
-| Next action | Obtain and review the later procedure report for SYN-001. |
-| Scheduled time | A future demo date and time, in the displayed zone. |
-
-Click **Save record** and check the saved owner, action and schedule.
-
-### 3. Add the later report as new evidence
-
-In **Evidence**, select `CareLoop_Demo_Completed_SYN001_v1.pdf` under **PDF to import**, then click **Import PDF**. Expand the extracted page and use **Open original** to compare the patient reference and full statement with the original PDF.
-
-Give **Evidence title** a recognizable name, such as `Later procedure completion report - SYN-001`. Keep **Earlier evidence being corrected** set to **Add as new evidence**. Check the comparison declaration and click **Register confirmed evidence**. Wait until registration completes.
-
-This later report describes a subsequent event. Preserve the earlier report, which accurately recorded that the procedure had not yet been performed.
-
-### 4. Record the human confirmations
-
-Return to **Care pathway**.
-
-1. **Confirm procedure**: choose the later report under **Active evidence supporting completion**. Explain how the later report resolves the earlier incomplete findings, check the verification declaration and save.
-2. **Complete next action**: record that the requested report was obtained and reviewed, with the supporting reason, then save.
-3. **Review result & plan**: record the synthetic result/plan review and save.
-4. **Record explanation**: record the synthetic explanation and save.
-
-Describe the exercise as a process demonstration. The fixture contains no real clinical findings, and no real patient has been contacted. Inspect all six checklist items; the seed case supplies the other demonstration confirmations.
-
-### 5. Check the current evidence and close
-
-Run **Check evidence** after changes. The verified v0.4.12 rules-only walkthrough produced zero review items. If **Review items and judgments** shows zero, no item judgment is needed; the six closure confirmations still apply.
-
-If review items are listed:
-
-1. Compare each quotation with its linked source, then click **Review and record judgment**.
-2. Under **Disposition**, choose **Resolved** if the evidence establishes resolution, **Not applicable** if the item does not apply, or **Action required** if follow-up is needed. For **Action required**, first record an owner and an open next action; adopting an item does not resolve it or permit closure.
-3. Select the relevant **Active evidence reviewed**, enter the **Reason and verification**, then click **Save judgment**. Base the decision on the current source documents.
-
-When all required confirmations are current and current review items have been handled, click **Close pathway**. Enter the synthetic closure reason, check the declaration and save. The case becomes **Closed**, and its closure decision is retained.
-
-Gemini is optional. If you choose **Gemini + rules (not clinically validated)**, inspect the **AI execution records** and review any proposed items against the original source. Candidate count may be zero. This optional upload exercise can use the deterministic rules without a model call; natural-language questions use the configured Gemini connection.
-
-### 6. Correct the later report
-
-In **Evidence**, import `CareLoop_Demo_Correction_SYN001_v1.pdf`. Compare the original and extracted text. Its statement says that only the first stage was performed and required steps remain pending.
-
-Enter a recognizable title. Under **Earlier evidence being corrected**, select the **later completion report from step 3**. Check the comparison declaration and register the confirmed evidence.
-
-### 7. Verify the resulting state
-
-Inspect **Care pathway**, **Evidence** and **History**. Run **Check evidence** again and confirm:
-
-- The case requires renewed review.
-- The correction explicitly refers to the later report; that report is superseded.
-- Procedure evidence, clinician result review and plan communication require renewed confirmation. In the verified walkthrough, three of six confirmations remain valid.
-- Closure is unavailable while the corrected incomplete state remains unresolved.
-- Earlier source PDFs and the previous closure decision remain available.
-
-Do not confirm completion against a source that says required steps remain pending.
-
-See [validation](validation.md) for checks with their release, date and scope, and [scope and limitations](scope-and-limitations.md) for the boundaries of the prototype.
+The PDF exercise can use the rules throughout. If you select **Gemini + rules**, compare each candidate with its cited passage before recording a judgment. [Validation](validation.md) · [Scope and limitations](scope-and-limitations.md)

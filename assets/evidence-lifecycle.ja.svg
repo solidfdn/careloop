@@ -5442,7 +5442,7 @@ z
     </g>
    </g>
    <g id="text_8">
-    <!-- 原資料を保持 -->
+    <!-- 資料を保持 -->
     <g style="fill: #566579" transform="translate(60.48 265.68) scale(0.144 -0.144)">
      <defs>
       <path id="NotoSansJP-Regular-539f" d="M 1114 5024 
@@ -5614,12 +5614,11 @@ L 5645 2822
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#NotoSansJP-Regular-539f"/>
-     <use xlink:href="#NotoSansJP-Regular-8cc7" transform="translate(99.999985 0)"/>
-     <use xlink:href="#NotoSansJP-Regular-6599" transform="translate(199.999969 0)"/>
-     <use xlink:href="#NotoSansJP-Regular-3092" transform="translate(299.999954 0)"/>
-     <use xlink:href="#NotoSansJP-Regular-4fdd" transform="translate(399.999939 0)"/>
-     <use xlink:href="#NotoSansJP-Regular-6301" transform="translate(499.999924 0)"/>
+     <use xlink:href="#NotoSansJP-Regular-8cc7"/>
+     <use xlink:href="#NotoSansJP-Regular-6599" transform="translate(99.999985 0)"/>
+     <use xlink:href="#NotoSansJP-Regular-3092" transform="translate(199.999969 0)"/>
+     <use xlink:href="#NotoSansJP-Regular-4fdd" transform="translate(299.999954 0)"/>
+     <use xlink:href="#NotoSansJP-Regular-6301" transform="translate(399.999939 0)"/>
     </g>
    </g>
    <g id="text_9">

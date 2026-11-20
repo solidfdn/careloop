@@ -2,63 +2,41 @@
 
 **Helping screening results lead to the necessary tests and care.**
 
-CareLoop connects source evidence, the accountable team and the next action. When a report is corrected, it identifies which confirmations need renewed review while retaining the earlier decision. Care teams can ask Gemini-supported questions in natural language and follow the answer back to the records.
+A test can be complete while the patient is still waiting for the result. A missed appointment can leave a patient unsure who will call to rebook. CareLoop shows which patients need follow-up, the record behind each case, and who is responsible for the next step.
 
-[日本語](README.ja.md) · [Demo video](https://youtu.be/y_zqr-R8R3g) · [Open the live demo](https://careloop-demo-864232222461.asia-northeast1.run.app/entry/) · [Hands-on guide](docs/demo-guide.md) · [Architecture](docs/architecture.md) · [Review map](docs/reviewer-map.md)
+[Open the live demo](https://careloop-demo-864232222461.asia-northeast1.run.app/entry/) · [English demo video (v12, 2 min 59 sec, MP4)](https://raw.githubusercontent.com/solidfdn/careloop/main/assets/careloop-demo-en.mp4) · [Technical briefing (v3.2, PDF)](docs/CareLoop-Technical-Briefing-EN.pdf) · [日本語](README.ja.md)
 
-A working prototype using synthetic records. The [demo video](https://youtu.be/y_zqr-R8R3g) follows **CL-006 / Kenji Morgan / SYN-006** in **v0.5.2 (RC9)**.
+## Follow the cases in the video
 
-## The gap CareLoop addresses
+The **v0.5.2 RC32** workspace opens with 300 patients created for this colorectal screening follow-up demo. In a fresh workspace, 182 patients have active follow-up. Select a queue to open its patient list. The same patient may need more than one kind of follow-up.
 
-A completed specialist visit can still leave the intended procedure unfinished. A status field alone can hide the gap between an abnormal screening result and the tests or care that need to follow.
+[![The CareLoop worklist showing 300 patients, follow-up priorities and the patient list](assets/worklist.en.jpg)](assets/worklist.en.jpg)
 
-CareLoop keeps the evidence behind completion visible. A correction can invalidate current confirmations without erasing the earlier human decision. The prototype demonstrates follow-up after a positive faecal immunochemical test (FIT).
-
-## Try the demonstrated case
-
-1. Open the [English workspace](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en) as **Care coordinator**. [Japanese](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja) and Arabic are available from the language selector.
-2. If the workspace contains only the original four cases, click **Explore 300 patients** once. This adds the demonstration records while preserving the existing cases.
-3. Search for **CL-006**, open **Kenji Morgan**, and inspect **History**, **Evidence**, and **Outstanding items and evidence**.
-4. In **Ask the record**, ask **“Why does this case need review again?”** Follow the cited records, then check the accountable owner and whether a next action is recorded.
-
-The [hands-on guide](docs/demo-guide.md) explains the expected state and provides a separate CL-001 PDF upload and closure exercise. Use another browser profile or private window for an independent workspace. Tabs in the same profile share the session. Demo dates and counts depend on workspace creation and later actions.
-
-[![CareLoop v0.5.2: CL-006 requires review after a corrected report](assets/careloop-case.en.png)](assets/careloop-case.en.png)
-
-*CL-006 in the current demonstration. Three of six confirmations remain valid after the correction. The earlier closure remains in the history. Click the image to enlarge.*
-
-## What the demonstration shows
-
-| Situation | CareLoop behaviour |
+| Start here | What to look for |
 | --- | --- |
-| A closed case receives a correction saying “consultation only” and “required procedure not performed.” | The case returns to review. Procedure evidence, clinician result review and plan communication need renewed confirmation. The prior closure and source reports remain available. |
-| A staff member asks why review is needed. | Gemini interprets the question and selects relevant record blocks and source passages. The service binds the displayed facts to those records, with citations and a checked-at time. Questions do not change case records. |
-| A needed fact is absent, or active sources conflict. | The answer identifies the limitation instead of inventing the missing fact. The reviewer can inspect the cited source material. |
-| A next action has not been recorded. | The owner remains visible and the missing action is explicit. In the starting CL-006 example, Follow-up team A is accountable and no next action is recorded. |
-| A team requests a handoff. | The current team remains accountable until the receiving team accepts. |
-| A patient needs further explanation. | The patient view records understanding or a request for more explanation, separately from acknowledgement that guidance was read. |
+| [Undelivered test results · CL-015](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en&queue=result_waiting) | Rami Morgan has had a colonoscopy and is waiting for the result. Open the delivery record, then record which team will check with the clinic and contact the patient, and when. |
+| [Missed appointments · CL-025](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en&queue=missed_appointment) | Omar Sato missed a visit and has no new booking. Record the plan for a call. In the patient view, Omar can ask who will arrange the appointment and read the care team's reply. |
+| [Patient worklist](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=en) | Ask how many patients are waiting for an explanation and open the matching records. After Omar submits his question in the video, the answer identifies 30 of 300 patients. |
 
-## System at a glance
+The [hands-on guide](docs/demo-guide.md) follows these cases in order. It also shows how a receiving clinic accepts a referral (CL-002), how a corrected report reopens a case while preserving the earlier decision (CL-006), and how to try the PDF import exercise (CL-001). The workspace is also available in [Japanese](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja) and [Arabic](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ar).
 
-Original documents, extracted text, AI assistance and human decisions remain distinct. Gemini supports natural-language record questions and optional evidence-review candidates. The API enforces workflow conditions, and people authorize closure. See the [architecture and evidence lifecycle](docs/architecture.md), [access and operating controls](docs/security-and-operations.md), and [implementation-to-evidence map](docs/reviewer-map.md).
+## How a case reaches closure
 
-## People make the decisions
+CareLoop links source documents, review decisions, the accountable team and the next action. The referring team stays accountable until the receiving team accepts the handoff. The patient can record what needs explaining in their own words, and the care team can reply in the same case.
 
-Answers support review of recorded facts. Staff verify the cited evidence and take any action separately in the case record. Deterministic rules and Gemini review candidates are identified separately. AI does not authorize closure or determine diagnosis, urgency or treatment.
+Gemini helps staff ask questions about the records and identify passages that may need review. Staff can inspect the supporting material, including where a fact is missing or records conflict. The API checks the workflow conditions. A person reviews the evidence and authorizes closure.
 
 ## Technical reference
 
 | Document | Purpose |
 | --- | --- |
-| [Hands-on guide](docs/demo-guide.md) | Follow CL-006 from correction to cited answer and responsibility; optionally try the CL-001 PDF exercise. |
-| [Architecture and evidence lifecycle](docs/architecture.md) | Inspect the components, data relationships and AI boundaries. |
-| [Access, data controls and operation](docs/security-and-operations.md) | Review persona permissions, retention, dependencies, capacity and failure handling. |
-| [Implementation and review map](docs/reviewer-map.md) | Connect demonstrated features to evidence and the planned pilot. |
-| [Validation](docs/validation.md) | See technical checks with their release, date, scope and limitations. |
-| [Scope and limitations](docs/scope-and-limitations.md) | Understand the prototype's operating and evaluation limits. |
-| [Fixture details](demo-data/README.md) | Identify the optional CL-001 PDFs and verify their bytes. |
-| [Rights and attribution](NOTICE.md) | Understand ownership and publication scope. |
+| [Technical briefing v3.2 (PDF, 17 pages)](docs/CareLoop-Technical-Briefing-EN.pdf) | An illustrated walkthrough of the two cases, architecture, validation and pilot scope. |
+| [Architecture and evidence lifecycle](docs/architecture.md) | Components, record relationships and the role of AI. |
+| [Access, data controls and operation](docs/security-and-operations.md) | Persona permissions, retention, dependencies, capacity and failure handling. |
+| [Implementation and review map](docs/reviewer-map.md) | Demonstrated features, their supporting evidence and the planned pilot. |
+| [Validation](docs/validation.md) · [Scope and limitations](docs/scope-and-limitations.md) | Technical checks, versions tested and evaluation limits. |
+| [PDF exercise files](demo-data/README.md) · [Rights and attribution](NOTICE.md) | Downloadable CL-001 records, file verification and publication terms. |
 
-This repository publishes product documentation, selected illustrations and synthetic fixtures. The application implementation is not included. Technical results are developer checks on synthetic workflows; clinical outcomes, staff-time savings and independent user evaluation have not been measured.
+This repository publishes demonstration videos, documentation, selected illustrations and sample PDFs. Evaluation to date covers developer checks on the demo workflows. Clinical outcomes and staff-time savings remain to be assessed with care teams.
 
-Prepared by [SOLIFAN](https://www.solid-fdn.co.jp/) for Future Health Digital Innovation Challenge, **Challenge 05: Closing the Screening-to-Care Loop**.
+Prepared by [SOLIFAN](https://www.solid-fdn.co.jp/en/) for the Future Health Digital Innovation Challenge, **Challenge 05 — Closing the Screening-to-Care Loop**.

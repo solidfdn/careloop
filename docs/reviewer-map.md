@@ -7,25 +7,25 @@ This page connects the product claims to the working demonstration and retained 
 ## Review the product in three passes
 
 1. **Understand:** read the [system and evidence diagrams](architecture.md). Identify who owns the next action, which source supports a decision, and who can close the pathway.
-2. **Try:** follow the main [CL-006 walkthrough](demo-guide.md): inspect the correction and previous closure, ask why review is required, and identify the owner and missing next action. The separate CL-001 [PDF exercise](../demo-data/README.md) covers upload and correction; CL-002 supports the handoff example.
+2. **Try** the [hands-on guide](demo-guide.md). In CL-015, trace the overdue result to the source and assign follow-up. In CL-025, check attendance, record the next call and read the patient’s question. The guide also covers referral acceptance (CL-002), the corrected report (CL-006) and the optional [PDF exercise](../demo-data/README.md) (CL-001).
 3. **Assess:** compare the behaviours below with [versioned results](validation.md), [operating controls](security-and-operations.md) and [limitations](scope-and-limitations.md).
 
 ## Function-to-evidence map
 
 | Capability | Implementation / demonstration | Available evidence | Boundary |
 | --- | --- | --- | --- |
-| Find unfinished follow-up | Worklist shows review needs, priority, completion, owners and next actions | CL-006 and the 300-record demonstration; versioned v0.5.2 checks | Record counts are not distinct patients or production capacity. |
-| Ask the record in natural language | Gemini selects supplied blocks and passages; server validates and renders facts, references and checked time | CL-006 questions; RC6 144 answer tests and 7 live questions in EN/JA/AR | One-case live examples are not a general accuracy estimate; questions do not change case records. |
+| Find unfinished follow-up | The roster links work queues, priorities, owners and next actions | CL-015 result follow-up and CL-025 missed appointment in the 300-patient demo | Priority bands count records. Matching lists can show several records for the same patient. |
+| Ask the record in natural language | Answers show recorded facts, source references and the matching list for worklist counts | RC32 clarification count and case-list check; RC6 case questions in English, Japanese and Arabic | Questions are read-only. These checks cover the demonstrated inputs. |
 | Keep responsibility clear | Current owner remains until handoff acceptance; next action has owner and schedule | CL-006 owner/next-action view; CL-002 handoff; versioned workflow tests | Acceptance is simulated; no receiving-provider authentication. |
 | Trace PDF evidence | Original bytes, page text/hashes, explicit comparison and same-case registration | Published fixtures; versioned PDF and hosted API checks | Text PDFs only; no OCR or issuer verification. |
 | Handle later events and corrections differently | New event added; correction explicitly supersedes a report; old material retained | CL-006 prior closure and corrected report; optional CL-001 exercise; API checks | Constructed scenario, not a clinical outcome study. |
 | Require current human decisions | Source-bound judgments, required confirmations, action completion and current review gate closure | v0.5.2 RC4 regression and hosted API checks | Demo persona, not authenticated clinical sign-off. |
-| Respond to patient needs | Guidance responses, clarification requests, support preferences and holds | Patient guidance view and versioned patient-response tests | No measured comprehension or patient-use study. |
+| Respond to patient needs | Record the patient’s question and a staff reply; show the latest reply above the patient’s message field | CL-025 asks who will call to rebook, then receives the team’s answer | No measured change in patient understanding. |
 | Keep alternative outcomes distinct | Evidence-backed decline/alternative disposition; no false procedure-completion flag | Versioned pathway regression tests | Local clinical policy still needs approval. |
 | Maintain state under change | Revision conflicts, scoped sessions, retained histories and usage limits | RC4 full regression, including Firestore emulator; revision-conflict checks | No production load or service-level validation. |
 | Support EN / JA / AR | Shared records, Arabic RTL, locale-specific scheduling | RC6 live question samples in EN/JA/AR; RC9 localized file-picker checks | Specialist-language validation is outstanding; UI language does not translate originals. |
 
-The [current verification summary](../evidence/careloop-v0.5.2-verification.json) and [validation page](validation.md) identify dates, tested versions and limits. RC4 had 1,247 passing tests; RC6 had 144 answer tests. These are different runs with overlapping coverage, not an additive total or an RC9 full-suite rerun. The original application source and full test suite are not published, so these developer checks cannot be rebuilt from this repository alone. Historical results remain separately available.
+The [RC4–RC9 verification record](../evidence/careloop-v0.5.2-verification.json) reports 1,247 backend tests on RC4 and 144 answer tests on RC6. Coverage overlaps. The [validation page](validation.md) records the RC32 walkthrough separately and identifies each run’s scope.
 
 ## Coverage of the assessment topics
 
@@ -33,7 +33,7 @@ The [official challenge page](https://hack2skill.com/event/futurehealthchallenge
 
 | Assessment topic | Where to inspect CareLoop | Present status |
 | --- | --- | --- |
-| Health need and potential benefit | [Problem and scenario](../README.md), CL-006 walkthrough | Follow-up gap demonstrated with fictional records; health benefit unmeasured. |
+| Health need and potential benefit | [Problem and scenario](../README.md), CL-015 and CL-025 | Unresolved follow-up is demonstrated with records created for the demo. Health benefit is unmeasured. |
 | System design and technical substance | [Architecture](architecture.md), source lifecycle, data relationships and AI boundary | Implemented prototype architecture documented against retained source. |
 | Observable working behaviour | [Hands-on guide](demo-guide.md), [fixtures](../demo-data/README.md), [validation](validation.md) | Hosted interaction and versioned technical results available. |
 | AI oversight and data controls | [Access and data controls](security-and-operations.md) | Source validation, human decisions and demo boundaries documented; no independent safety certification. |

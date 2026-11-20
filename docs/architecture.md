@@ -16,7 +16,7 @@ flowchart TB
     API -->|Validated facts and source references| UI
 ```
 
-The diagram describes **v0.5.2**, checked against the retained RC9 implementation and publication record. RC9 updates the localized file picker; RC7–RC8 update sidebar branding. The question-answering implementation and its separate test results are described in [validation](validation.md).
+The v0.5.2 RC32 service uses this architecture for both individual cases and worklist questions. The [validation record](validation.md) identifies the release tested for each workflow.
 
 | Component | Responsibility | Data or boundary |
 | --- | --- | --- |
@@ -39,7 +39,7 @@ The model receives bounded context from the API and returns selections or candid
 5. **Confirm and close.** Record procedure evidence, result/plan review, explanation and action completion. The API requires a current review and all applicable conditions before accepting closure.
 6. **Reconsider changes.** Adding clinical evidence, including a correction, clears procedure, result-review and plan-communication confirmations. A closed case becomes `review_required`. Decisions bound to an older source set need renewed review; previous decisions remain in history.
 
-The main walkthrough follows **CL-006**: an earlier closure remains in history after a correction states that only a consultation occurred and the required procedure was not performed. Three dependent confirmations become invalid; three remain valid. The separate CL-001 PDF exercise demonstrates adding a later event before correcting that later report. The correction names the report being corrected.
+The [walkthrough](demo-guide.md) follows a test result that has not reached the patient (CL-015) and a missed appointment with no replacement booking (CL-025). A separate correction example, CL-006, shows how a report that only a consultation took place invalidates three confirmations while preserving the previous closure. CL-001 provides the PDF import and correction exercise.
 
 ## Records and relationships
 
@@ -47,7 +47,7 @@ The following table describes logical application records.
 
 | Record | Main fields and links | Purpose |
 | --- | --- | --- |
-| Workspace | Expiry, workspace revision, initial examples and explicit expansion to 300 synthetic follow-up records | Separate browser-session copies; expiry is distinct from deletion. A record count is not a distinct-patient count. |
+| Workspace | Expiry, revision and a starting list of 300 patients created for the demo | Each reviewer session has its own records. |
 | Case | Patient reference, revision, current/pending owner, pathway, status, next action | Preserve responsibility and unfinished work. |
 | PDF extraction | Original hash/generation, page text and hashes, extractor/version | Check originals and extracted text independently. |
 | Evidence | ID, text hash, version, `supersedes`, PDF reference, comparison record | Change active sources without overwriting originals. |
@@ -67,7 +67,7 @@ Staff can ask about the selected case or the authorized worklist in English, Jap
 4. Missing information, conflicting sources and unsupported requests are surfaced. A currently invalid confirmation is not proof that care did not occur; such a statement must come from an identified source.
 5. Asking a question does not change case records or authorize closure. The server checks for record changes during answering and rejects a stale result. AI execution and resource-use records are recorded separately.
 
-Workspace totals are computed from the authorized scope. Individual explanations cover a bounded selection and are not a complete clinical review of all 300 records. Selecting a case makes its original evidence available for questions about source wording. The patient demo role cannot query staff worklists.
+Worklist questions count distinct patient identifiers across the authorized selection. An answer can open the matching follow-up records. P1–P4 count follow-up records, so one patient can contribute more than one. A question naming a patient or case searches the authorized selection for that identifier. Source detail is bounded by the question context. Only staff personas can ask about the worklist.
 
 ## Optional evidence review: input, output and authority
 

@@ -4,7 +4,7 @@
 
 ## Implemented demonstration
 
-The prototype demonstrates a fictional screening follow-up pathway, original PDF comparison and registration, source-linked review items, named next actions, handoffs, human confirmations, conditional closure, correction-driven review and history retention. It provides care-team and patient-facing views, a bounded 300-record worklist demonstration, priority and completion views, natural-language record questions with Gemini, and patient responses for understanding or further explanation. The current published revision is v0.5.2 RC9.
+CareLoop v0.5.2 RC32 opens a list of 300 patients created for the demo. The care team can find an overdue result or a missed appointment, inspect the record, assign a next action and reply to a patient. The patient can read the reply and ask for clarification. Additional examples cover PDF registration, referral acceptance, human confirmation and reopening follow-up after a corrected report.
 
 The public application is in synthetic-demo mode. Use only fictional data and the supplied fixtures. No real patient or provider is contacted. Demo role selection does not verify identity or clinical qualifications.
 
@@ -15,7 +15,7 @@ The public application is in synthetic-demo mode. Use only fictional data and th
 - Gemini interprets questions and selects relevant supplied records or passages. The server binds answers to recorded facts and source references, shows checked time, and reports missing information, conflicts and scope limits. Answers can still be incomplete or select the wrong relevant material; inspect the cited record.
 - Questions do not update case records or approve closure. The patient demo role cannot query staff worklists.
 - AI review proposals require inspection and human decisions. Zero proposed items does not establish completeness.
-- A 300-record demonstration is not production load validation. Counts refer to follow-up records; distinct-patient counts are not supported. Workspace answers may summarize computed totals while individual explanations cover only the stated subset.
+- Worklist questions can report distinct patients and open the matching records. The priority bands count follow-up records. Queues can overlap, and the results change as reviewers update cases. Production capacity has not been measured.
 - Institution-specific pathways, clinical deadlines and escalation arrangements require local definition.
 - EHR/FHIR, OCR and live provider messaging are not integrated in the demonstrated scope.
 - Session expiry and public resource limits can stop an exercise. This demonstration does not establish production availability, load capacity or an operational service-level commitment.
