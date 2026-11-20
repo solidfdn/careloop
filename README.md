@@ -4,7 +4,7 @@
 
 A test can be complete while the patient is still waiting for the result. A missed appointment can leave a patient unsure who will call to rebook. CareLoop shows which patients need follow-up, the record behind each case, and who is responsible for the next step.
 
-[Open the live demo](https://careloop-demo-864232222461.asia-northeast1.run.app/entry/) · [English demo video (v12, 2 min 59 sec, MP4)](https://raw.githubusercontent.com/solidfdn/careloop/main/assets/careloop-demo-en.mp4) · [Technical briefing (v3.2, PDF)](docs/CareLoop-Technical-Briefing-EN.pdf) · [日本語](README.ja.md)
+[Open the live demo](https://careloop-demo-864232222461.asia-northeast1.run.app/entry/) · [English demo video (v12, 2 min 59 sec, MP4)](https://raw.githubusercontent.com/solidfdn/careloop/main/assets/careloop-demo-en.mp4) · [Technical briefing (v3.3, PDF)](docs/CareLoop-Technical-Briefing-EN.pdf) · [日本語](README.ja.md)
 
 ## Follow the cases in the video
 
@@ -30,7 +30,7 @@ Gemini helps staff ask questions about the records and identify passages that ma
 
 | Document | Purpose |
 | --- | --- |
-| [Technical briefing v3.2 (PDF, 17 pages)](docs/CareLoop-Technical-Briefing-EN.pdf) | An illustrated walkthrough of the two cases, architecture, validation and pilot scope. |
+| [Technical briefing v3.3 (PDF, 18 pages)](docs/CareLoop-Technical-Briefing-EN.pdf) | The two cases, system architecture diagram (p. 10), validation and pilot scope. |
 | [Architecture and evidence lifecycle](docs/architecture.md) | Components, record relationships and the role of AI. |
 | [Access, data controls and operation](docs/security-and-operations.md) | Persona permissions, retention, dependencies, capacity and failure handling. |
 | [Implementation and review map](docs/reviewer-map.md) | Demonstrated features, their supporting evidence and the planned pilot. |

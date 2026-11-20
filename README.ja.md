@@ -4,7 +4,7 @@
 
 検査が終わっても、結果が患者さんに届いていないことがあります。予約日に来院できず、次の予約を誰に頼めばよいか分からない方もいます。CareLoopでは、どんな対応が残っているか、その根拠は何か、誰が担当するかを確認できます。
 
-[日本語の操作デモ](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja) · [日本語動画（v6・2分58秒・MP4）](https://raw.githubusercontent.com/solidfdn/careloop/main/assets/careloop-demo-ja.mp4) · [応募用英語動画（v12・2分59秒・MP4）](https://raw.githubusercontent.com/solidfdn/careloop/main/assets/careloop-demo-en.mp4) · [英語技術資料（v3.2・PDF）](docs/CareLoop-Technical-Briefing-EN.pdf) · [English](README.md)
+[日本語の操作デモ](https://careloop-demo-864232222461.asia-northeast1.run.app/?lang=ja) · [日本語動画（v6・2分58秒・MP4）](https://raw.githubusercontent.com/solidfdn/careloop/main/assets/careloop-demo-ja.mp4) · [応募用英語動画（v12・2分59秒・MP4）](https://raw.githubusercontent.com/solidfdn/careloop/main/assets/careloop-demo-en.mp4) · [英語技術資料（v3.3・PDF）](docs/CareLoop-Technical-Briefing-EN.pdf) · [English](README.md)
 
 ## 動画と同じ症例を開く
 
@@ -30,7 +30,7 @@ Geminiは、記録についての質問への回答と、確認が必要な箇�
 
 | 資料 | 内容 |
 | --- | --- |
-| [英語技術資料 v3.2（PDF・17ページ）](docs/CareLoop-Technical-Briefing-EN.pdf) | 動画で扱う2つの症例、システム構成、検証結果、実証の範囲。 |
+| [英語技術資料 v3.3（PDF・18ページ）](docs/CareLoop-Technical-Briefing-EN.pdf) | 動画で扱う2つの症例、システム構成図（10ページ）、検証結果、実証の範囲。 |
 | [構成図と資料・判断の流れ](docs/architecture.ja.md) | 構成要素、記録の関係、AIが支援する範囲。 |
 | [権限・データ管理・運用](docs/security-and-operations.ja.md) | 操作権限、データの保持、容量、障害時の扱い。 |
 | [実装・検証の対応表](docs/reviewer-map.ja.md) | 実演する機能と検証結果、今後の実証計画。 |
